@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>King&#39;s Blog</title>
+  
+  <subtitle>纸上得来终觉浅，绝知此事要躬行</subtitle>
+  <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://jinzewang.github.io/"/>
+  <updated>2021-05-16T10:49:26.118Z</updated>
+  <id>https://jinzewang.github.io/</id>
+  
+  <author>
+    <name>King</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HashMap学习与理解</title>
+    <link href="https://jinzewang.github.io/_posts/HashMap/"/>
+    <id>https://jinzewang.github.io/_posts/HashMap/</id>
+    <published>2021-05-16T07:45:46.450Z</published>
+    <updated>2021-05-16T10:49:26.118Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;绕树三匝，何枝可依。——曹操《短歌行》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h6 id=&quot;HashMap是什么？&quot;&gt;&lt;a href=&quot;#HashMap是什么？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="java，java extends" scheme="https://jinzewang.github.io/categories/java%EF%BC%8Cjava-extends/"/>
+    
+    
+    <category term="java" scheme="https://jinzewang.github.io/tags/java/"/>
+    
+    <category term="HashMap" scheme="https://jinzewang.github.io/tags/HashMap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>祝福</title>
+    <link href="https://jinzewang.github.io/_posts/1687806205/"/>
+    <id>https://jinzewang.github.io/_posts/1687806205/</id>
+    <published>2021-04-05T11:57:44.881Z</published>
+    <updated>2021-05-16T07:29:56.920Z</updated>
+    
+    
+    <summary type="html">今天生日，</summary>
+    
+    
+    
+    <category term="随笔" scheme="https://jinzewang.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="生活" scheme="https://jinzewang.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+    <category term="感想" scheme="https://jinzewang.github.io/tags/%E6%84%9F%E6%83%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java引用理解</title>
+    <link href="https://jinzewang.github.io/_posts/598062405/"/>
+    <id>https://jinzewang.github.io/_posts/598062405/</id>
+    <published>2021-04-05T11:57:44.865Z</published>
+    <updated>2021-05-16T07:29:56.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;h6 id=&quot;强引用（Strong-Reference&quot;&gt;&lt;a href=&quot;#强引用（Strong-Reference&quot; class=&quot;headerlink&quot; title=&quot;强引用（Strong Reference)&quot;&gt;&lt;/a&gt;强引用（Strong</summary>
+        
+      
+    
+    
+    
+    <category term="JVM" scheme="https://jinzewang.github.io/categories/JVM/"/>
+    
+    
+    <category term="java" scheme="https://jinzewang.github.io/tags/java/"/>
+    
+    <category term="JVM" scheme="https://jinzewang.github.io/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>经典进程同步问题</title>
+    <link href="https://jinzewang.github.io/_posts/625939543/"/>
+    <id>https://jinzewang.github.io/_posts/625939543/</id>
+    <published>2021-04-05T11:57:44.865Z</published>
+    <updated>2021-05-16T07:29:56.917Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+&lt;h5 id=&quot;一、生产者-消费者问题&quot;&gt;&lt;a href=&quot;#一、生产者-消费者问题&quot; class=&quot;headerlink&quot; title=&quot;一、生产者-消费者问题&quot;&gt;&lt;/a&gt;一、生产者-消费者问题&lt;/h5&gt;&lt;h6 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h6&gt;&lt;p&gt;生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="操作系统" scheme="https://jinzewang.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="进程同步" scheme="https://jinzewang.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
+    
+  </entry>
+  
+</feed>
