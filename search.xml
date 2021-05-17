@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>java引用理解</title>
-    <url>/_posts/598062405/</url>
+    <url>/_posts/JVM/jvm_foundation/</url>
     <content><![CDATA[<hr>
 <h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
 <h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
@@ -19,7 +19,7 @@
   </entry>
   <entry>
     <title>经典进程同步问题</title>
-    <url>/_posts/625939543/</url>
+    <url>/_posts/OS/process_sys/</url>
     <content><![CDATA[<hr>
 <h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
 <span id="more"></span>
@@ -42,8 +42,25 @@
       </tags>
   </entry>
   <entry>
+    <title>HashMap学习与理解</title>
+    <url>/_posts/java_extends/HashMap/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>绕树三匝，何枝可依。——曹操《短歌行》</p>
+</blockquote>
+<h6 id="HashMap是什么？"><a href="#HashMap是什么？" class="headerlink" title="HashMap是什么？"></a>HashMap是什么？</h6><p>HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，</p>
+<h6 id="HashMap的put与get方法"><a href="#HashMap的put与get方法" class="headerlink" title="HashMap的put与get方法"></a>HashMap的put与get方法</h6><h6 id="HashMap高并发下引起的死锁"><a href="#HashMap高并发下引起的死锁" class="headerlink" title="HashMap高并发下引起的死锁"></a>HashMap高并发下引起的死锁</h6>]]></content>
+      <categories>
+        <category>java，java extends</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>HashMap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>祝福</title>
-    <url>/_posts/1687806205/</url>
+    <url>/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
   <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
   <div class="hbe hbe-content">
@@ -62,23 +79,6 @@
       <tags>
         <tag>生活</tag>
         <tag>感想</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HashMap学习与理解</title>
-    <url>/_posts/HashMap/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>绕树三匝，何枝可依。——曹操《短歌行》</p>
-</blockquote>
-<h6 id="HashMap是什么？"><a href="#HashMap是什么？" class="headerlink" title="HashMap是什么？"></a>HashMap是什么？</h6><p>HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，</p>
-<h6 id="HashMap的put与get方法"><a href="#HashMap的put与get方法" class="headerlink" title="HashMap的put与get方法"></a>HashMap的put与get方法</h6><h6 id="HashMap高并发下引起的死锁"><a href="#HashMap高并发下引起的死锁" class="headerlink" title="HashMap高并发下引起的死锁"></a>HashMap高并发下引起的死锁</h6>]]></content>
-      <categories>
-        <category>java，java extends</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>HashMap</tag>
       </tags>
   </entry>
 </search>
