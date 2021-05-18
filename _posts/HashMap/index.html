@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="java,HashMap," />
+  <meta name="keywords" content="-java -hashmap," />
 
 
 
@@ -127,18 +127,17 @@
 
 
 
-<meta name="description" content="绕树三匝，何枝可依。——曹操《短歌行》  HashMap是什么？HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合， HashMap的put与get方法HashMap高并发下引起的死锁">
+<meta name="description" content="绕树三匝，何枝可依。——曹操《短歌行》  HashMap是什么？HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，它允许null值和null键，它可以根据给定的key通过哈希函数计算得到存储的位置。 HashMap默认初始容量一般是16，默认负载因子是0.75，当散列表中的数目超过容量的75%时，散列表将会重建为原来的两倍，通过包含两个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashMap学习与理解">
-<meta property="og:url" content="https://jinzewang.github.io/_posts/java_extends/HashMap/index.html">
+<meta property="og:title" content="一起学习HashMap">
+<meta property="og:url" content="https://jinzewang.github.io/_posts/HashMap/index.html">
 <meta property="og:site_name" content="King&#39;s Blog">
-<meta property="og:description" content="绕树三匝，何枝可依。——曹操《短歌行》  HashMap是什么？HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合， HashMap的put与get方法HashMap高并发下引起的死锁">
+<meta property="og:description" content="绕树三匝，何枝可依。——曹操《短歌行》  HashMap是什么？HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，它允许null值和null键，它可以根据给定的key通过哈希函数计算得到存储的位置。 HashMap默认初始容量一般是16，默认负载因子是0.75，当散列表中的数目超过容量的75%时，散列表将会重建为原来的两倍，通过包含两个">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-05-16T07:45:46.450Z">
-<meta property="article:modified_time" content="2021-05-17T03:39:18.888Z">
+<meta property="article:modified_time" content="2021-05-18T08:56:35.690Z">
 <meta property="article:author" content="King">
-<meta property="article:tag" content="java">
-<meta property="article:tag" content="HashMap">
+<meta property="article:tag" content="-java -hashmap">
 <meta name="twitter:card" content="summary">
 
 
@@ -169,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="https://jinzewang.github.io/_posts/java_extends/HashMap/"/>
+  <link rel="canonical" href="https://jinzewang.github.io/_posts/HashMap/"/>
 
 
 
 
 
-  <title>HashMap学习与理解 | King's Blog</title>
+  <title>一起学习HashMap | King's Blog</title>
   
 
 
@@ -356,7 +355,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/_posts/java_extends/HashMap/">
+    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/_posts/HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -373,7 +372,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">HashMap学习与理解</h2>
+          <h2 class="post-title" itemprop="name headline">一起学习HashMap</h2>
         
 
         <div class="post-meta">
@@ -394,8 +393,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%EF%BC%8Cjava-extends/" itemprop="url" rel="index">
-                    <span itemprop="name">java，java extends</span>
+                  <a href="/categories/java-extends/" itemprop="url" rel="index">
+                    <span itemprop="name">java_extends</span>
                   </a>
                 </span>
 
@@ -412,8 +411,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/_posts/java_extends/HashMap/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/_posts/java_extends/HashMap/" itemprop="commentCount"></span>
+                <a href="/_posts/HashMap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/_posts/HashMap/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -421,7 +420,7 @@
 
           
           
-             <span id="/_posts/java_extends/HashMap/" class="leancloud_visitors" data-flag-title="HashMap学习与理解">
+             <span id="/_posts/HashMap/" class="leancloud_visitors" data-flag-title="一起学习HashMap">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -459,8 +458,23 @@
 <blockquote>
 <p>绕树三匝，何枝可依。——曹操《短歌行》</p>
 </blockquote>
-<h6 id="HashMap是什么？"><a href="#HashMap是什么？" class="headerlink" title="HashMap是什么？"></a>HashMap是什么？</h6><p>HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，</p>
-<h6 id="HashMap的put与get方法"><a href="#HashMap的put与get方法" class="headerlink" title="HashMap的put与get方法"></a>HashMap的put与get方法</h6><h6 id="HashMap高并发下引起的死锁"><a href="#HashMap高并发下引起的死锁" class="headerlink" title="HashMap高并发下引起的死锁"></a>HashMap高并发下引起的死锁</h6>
+<h6 id="HashMap是什么？"><a href="#HashMap是什么？" class="headerlink" title="HashMap是什么？"></a>HashMap是什么？</h6><p>HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，它允许null值和null键，它可以根据给定的key通过哈希函数计算得到存储的位置。</p>
+<p>HashMap默认初始容量一般是16，默认负载因子是0.75，当散列表中的数目超过容量的75%时，散列表将会重建为原来的两倍，通过包含两个步骤，即重新开辟空间和重新计算散列。</p>
+<span id="more"></span>
+
+<p><strong>为什么默认初始容量是16，默认负载因子是0.75？</strong></p>
+<h6 id="HashMap的put与get方法"><a href="#HashMap的put与get方法" class="headerlink" title="HashMap的put与get方法"></a>HashMap的put与get方法</h6><p>put</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;<span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们调用put方法，传入key和value时，该类又调用了putVal方法，并传入相关参数，其中hash(key)方法源码是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，hash方法是计算我们传入put方法key的哈希码，若key为null则哈希值为0，否则获取key的哈希码并将它与它无符号右移16位后的值做异或运算（无符号右移：高位用<font color='red'>0</font>补，右移；异或运算：相异为1，相同为0）。即首先需要计算key的哈希值。</p>
+<p>putVal的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">* <span class="meta">@param</span> onlyIfAbsent <span class="keyword">if</span> <span class="keyword">true</span>, don<span class="string">&#x27;t change existing value</span></span><br><span class="line"><span class="string">* @param evict if false, the table is in creation mode.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span></span><br><span class="line"><span class="string">               boolean evict) &#123;</span></span><br><span class="line"><span class="string">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span></span><br><span class="line"><span class="string">    // 首先判断tab是否初始化，若没有则先调用resize()进行初始化</span></span><br><span class="line"><span class="string">    if ((tab = table) == null || (n = tab.length) == 0)</span></span><br><span class="line"><span class="string">        n = (tab = resize()).length;</span></span><br><span class="line"><span class="string">    // 若已经初始化，首先将key的哈希码与(n-1)做与运算，得到i值指向已有散列表中的某个对象，判断该指向是否为空，若为空直接将key对应的value存在这里</span></span><br><span class="line"><span class="string">    // 此处i = (n-1) &amp; hash，是基于数据结构之散列函数设计方法除留余数法的改进，除留余数法是指关键码key mod p 得到散列地址，p是适当正整数，这里是n-1，即散列表长度减一，（为什么要减一后面再聊），通过这样设计散列函数得到的散列地址更加随机，更加不会引起冲突</span></span><br><span class="line"><span class="string">    if ((p = tab[i = (n - 1) &amp; hash]) == null)</span></span><br><span class="line"><span class="string">        tab[i] = newNode(hash, key, value, null);</span></span><br><span class="line"><span class="string">    else &#123;</span></span><br><span class="line"><span class="string">        Node&lt;K,V&gt; e; K k;</span></span><br><span class="line"><span class="string">        // 判断我要存入的键值对与该散列地址已有的键值对是否相同(先后比较了两个对象key的哈希值和key的地址)，若相同，直接将该键值对赋给我们要插入的键值对</span></span><br><span class="line"><span class="string">        if (p.hash == hash &amp;&amp;</span></span><br><span class="line"><span class="string">            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span></span><br><span class="line"><span class="string">            e = p;</span></span><br><span class="line"><span class="string">        else if (p instanceof TreeNode)</span></span><br><span class="line"><span class="string">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span></span><br><span class="line"><span class="string">        else &#123;</span></span><br><span class="line"><span class="string">            for (int binCount = 0; ; ++binCount) &#123;</span></span><br><span class="line"><span class="string">                if ((e = p.next) == null) &#123;</span></span><br><span class="line"><span class="string">                    p.next = newNode(hash, key, value, null);</span></span><br><span class="line"><span class="string">                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span></span><br><span class="line"><span class="string">                        treeifyBin(tab, hash);</span></span><br><span class="line"><span class="string">                    break;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                if (e.hash == hash &amp;&amp;</span></span><br><span class="line"><span class="string">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span></span><br><span class="line"><span class="string">                    break;</span></span><br><span class="line"><span class="string">                p = e;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        if (e != null) &#123; // existing mapping for key</span></span><br><span class="line"><span class="string">            V oldValue = e.value;</span></span><br><span class="line"><span class="string">            if (!onlyIfAbsent || oldValue == null)</span></span><br><span class="line"><span class="string">                e.value = value;</span></span><br><span class="line"><span class="string">            afterNodeAccess(e);</span></span><br><span class="line"><span class="string">            return oldValue;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    ++modCount;</span></span><br><span class="line"><span class="string">    if (++size &gt; threshold)</span></span><br><span class="line"><span class="string">        resize();</span></span><br><span class="line"><span class="string">    afterNodeInsertion(evict);</span></span><br><span class="line"><span class="string">    return null;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>get</p>
+<h6 id="HashMap高并发下引起的死锁"><a href="#HashMap高并发下引起的死锁" class="headerlink" title="HashMap高并发下引起的死锁"></a>HashMap高并发下引起的死锁</h6>
       
     </div>
     
@@ -480,7 +494,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://jinzewang.github.io/_posts/java_extends/HashMap/" title="HashMap学习与理解">https://jinzewang.github.io/_posts/java_extends/HashMap/</a>
+    <a href="https://jinzewang.github.io/_posts/HashMap/" title="一起学习HashMap">https://jinzewang.github.io/_posts/HashMap/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -495,9 +509,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+            <a href="/tags/java-hashmap/" rel="tag"># -java -hashmap</a>
           
         </div>
       
@@ -510,7 +522,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/" rel="next" title="祝福">
+              <a href="/_posts/1687806205/" rel="next" title="祝福">
                 <i class="fa fa-chevron-left"></i> 祝福
               </a>
             

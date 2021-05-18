@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="生活,感想," />
+  <meta name="keywords" content="java,JVM," />
 
 
 
@@ -127,18 +127,18 @@
 
 
 
-<meta name="description" content="今天生日，">
+<meta name="description" content="强引用（Strong Reference)最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。 软引用(Soft Reference)在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。 弱引用(Weak Reference)GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收">
 <meta property="og:type" content="article">
-<meta property="og:title" content="祝福">
-<meta property="og:url" content="https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/index.html">
+<meta property="og:title" content="java引用理解">
+<meta property="og:url" content="https://jinzewang.github.io/_posts/jvm_foundation/index.html">
 <meta property="og:site_name" content="King&#39;s Blog">
-<meta property="og:description" content="今天生日，">
+<meta property="og:description" content="强引用（Strong Reference)最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。 软引用(Soft Reference)在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。 弱引用(Weak Reference)GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-05T11:57:44.881Z">
-<meta property="article:modified_time" content="2021-05-17T03:42:15.370Z">
+<meta property="article:published_time" content="2021-04-05T11:57:44.865Z">
+<meta property="article:modified_time" content="2021-05-18T08:53:42.404Z">
 <meta property="article:author" content="King">
-<meta property="article:tag" content="生活">
-<meta property="article:tag" content="感想">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
 
 
@@ -169,13 +169,13 @@
 
 
 
-  <link rel="canonical" href="https://jinzewang.github.io/_posts/随笔/微感/"/>
+  <link rel="canonical" href="https://jinzewang.github.io/_posts/jvm_foundation/"/>
 
 
 
 
 
-  <title>祝福 | King's Blog</title>
+  <title>java引用理解 | King's Blog</title>
   
 
 
@@ -356,7 +356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/">
+    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/_posts/jvm_foundation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -373,7 +373,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">祝福</h2>
+          <h2 class="post-title" itemprop="name headline">java引用理解</h2>
         
 
         <div class="post-meta">
@@ -394,8 +394,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -412,8 +412,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/" itemprop="commentCount"></span>
+                <a href="/_posts/jvm_foundation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/_posts/jvm_foundation/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -421,7 +421,7 @@
 
           
           
-             <span id="/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/" class="leancloud_visitors" data-flag-title="祝福">
+             <span id="/_posts/jvm_foundation/" class="leancloud_visitors" data-flag-title="java引用理解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -455,18 +455,12 @@
       
 
       
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+        <hr>
+<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
+<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
+<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
+<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
+
       
     </div>
     
@@ -486,7 +480,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/" title="祝福">https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/</a>
+    <a href="https://jinzewang.github.io/_posts/jvm_foundation/" title="java引用理解">https://jinzewang.github.io/_posts/jvm_foundation/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -501,9 +495,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag"># 生活</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/%E6%84%9F%E6%83%B3/" rel="tag"># 感想</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -516,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/_posts/JVM/jvm_foundation/" rel="next" title="java引用理解">
-                <i class="fa fa-chevron-left"></i> java引用理解
+              <a href="/_posts/process_sys/" rel="next" title="经典进程同步问题">
+                <i class="fa fa-chevron-left"></i> 经典进程同步问题
               </a>
             
           </div>
@@ -526,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/_posts/java_extends/HashMap/" rel="prev" title="HashMap学习与理解">
-                HashMap学习与理解 <i class="fa fa-chevron-right"></i>
+              <a href="/_posts/1687806205/" rel="prev" title="祝福">
+                祝福 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -693,6 +696,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%BC%BA%E5%BC%95%E7%94%A8%EF%BC%88Strong-Reference"><span class="nav-number">1.</span> <span class="nav-text">强引用（Strong Reference)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BD%AF%E5%BC%95%E7%94%A8-Soft-Reference"><span class="nav-number">2.</span> <span class="nav-text">软引用(Soft Reference)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%BC%B1%E5%BC%95%E7%94%A8-Weak-Reference"><span class="nav-number">3.</span> <span class="nav-text">弱引用(Weak Reference)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%99%9A%E5%BC%95%E7%94%A8-Phantom-Reference"><span class="nav-number">4.</span> <span class="nav-text">虚引用(Phantom Reference)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

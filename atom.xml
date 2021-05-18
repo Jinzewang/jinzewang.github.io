@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-05-17T03:39:18.888Z</updated>
+  <updated>2021-05-18T08:56:35.690Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -17,42 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>HashMap学习与理解</title>
-    <link href="https://jinzewang.github.io/_posts/java_extends/HashMap/"/>
-    <id>https://jinzewang.github.io/_posts/java_extends/HashMap/</id>
+    <title>一起学习HashMap</title>
+    <link href="https://jinzewang.github.io/_posts/HashMap/"/>
+    <id>https://jinzewang.github.io/_posts/HashMap/</id>
     <published>2021-05-16T07:45:46.450Z</published>
-    <updated>2021-05-17T03:39:18.888Z</updated>
+    <updated>2021-05-18T08:56:35.690Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;绕树三匝，何枝可依。——曹操《短歌行》&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h6 id=&quot;HashMap是什么？&quot;&gt;&lt;a href=&quot;#HashMap是什么？&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+&lt;h6 id=&quot;HashMap是什么？&quot;&gt;&lt;a href=&quot;#HashMap是什么？&quot; class=&quot;headerlink&quot; title=&quot;HashMap是什么？&quot;&gt;&lt;/a&gt;HashMap是什么？&lt;/h6&gt;&lt;p&gt;HashMap是基于哈希表实现了Map接口的一个类，它不是线程安全的，即不是同步的。是一种存储键值对的集合，它允许null值和null键，它可以根据给定的key通过哈希函数计算得到存储的位置。&lt;/p&gt;
+&lt;p&gt;HashMap默认初始容量一般是16，默认负载因子是0.75，当散列表中的数目超过容量的75%时，散列表将会重建为原来的两倍，通过包含两个步骤，即重新开辟空间和重新计算散列。&lt;/p&gt;</summary>
     
     
     
-    <category term="java，java extends" scheme="https://jinzewang.github.io/categories/java%EF%BC%8Cjava-extends/"/>
+    <category term="java_extends" scheme="https://jinzewang.github.io/categories/java-extends/"/>
     
     
-    <category term="java" scheme="https://jinzewang.github.io/tags/java/"/>
-    
-    <category term="HashMap" scheme="https://jinzewang.github.io/tags/HashMap/"/>
+    <category term="-java -hashmap" scheme="https://jinzewang.github.io/tags/java-hashmap/"/>
     
   </entry>
   
   <entry>
     <title>祝福</title>
-    <link href="https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/"/>
-    <id>https://jinzewang.github.io/_posts/%E9%9A%8F%E7%AC%94/%E5%BE%AE%E6%84%9F/</id>
+    <link href="https://jinzewang.github.io/_posts/1687806205/"/>
+    <id>https://jinzewang.github.io/_posts/1687806205/</id>
     <published>2021-04-05T11:57:44.881Z</published>
-    <updated>2021-05-17T03:42:15.370Z</updated>
+    <updated>2021-05-18T08:57:04.020Z</updated>
     
     
     <summary type="html">今天生日，</summary>
@@ -70,10 +63,10 @@
   
   <entry>
     <title>java引用理解</title>
-    <link href="https://jinzewang.github.io/_posts/JVM/jvm_foundation/"/>
-    <id>https://jinzewang.github.io/_posts/JVM/jvm_foundation/</id>
+    <link href="https://jinzewang.github.io/_posts/jvm_foundation/"/>
+    <id>https://jinzewang.github.io/_posts/jvm_foundation/</id>
     <published>2021-04-05T11:57:44.865Z</published>
-    <updated>2021-05-17T03:44:21.700Z</updated>
+    <updated>2021-05-18T08:53:42.404Z</updated>
     
     
       
@@ -98,10 +91,10 @@
   
   <entry>
     <title>经典进程同步问题</title>
-    <link href="https://jinzewang.github.io/_posts/OS/process_sys/"/>
-    <id>https://jinzewang.github.io/_posts/OS/process_sys/</id>
+    <link href="https://jinzewang.github.io/_posts/process_sys/"/>
+    <id>https://jinzewang.github.io/_posts/process_sys/</id>
     <published>2021-04-05T11:57:44.865Z</published>
-    <updated>2021-05-17T03:43:34.164Z</updated>
+    <updated>2021-05-18T08:54:07.991Z</updated>
     
     
     <summary type="html">&lt;hr&gt;

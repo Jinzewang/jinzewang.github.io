@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="进程同步," />
 
 
 
@@ -127,15 +127,17 @@
 
 
 
-<meta name="description" content="我随风而来，也随风而去">
-<meta property="og:type" content="website">
-<meta property="og:title" content="King&#39;s Blog">
-<meta property="og:url" content="https://jinzewang.github.io/categories/java%EF%BC%8Cjava-extends/index.html">
+<meta name="description" content="一、生产者-消费者问题问题描述：生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典进程同步问题">
+<meta property="og:url" content="https://jinzewang.github.io/_posts/process_sys/index.html">
 <meta property="og:site_name" content="King&#39;s Blog">
-<meta property="og:description" content="我随风而来，也随风而去">
+<meta property="og:description" content="一、生产者-消费者问题问题描述：生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-05T11:57:44.865Z">
+<meta property="article:modified_time" content="2021-05-18T08:54:07.991Z">
 <meta property="article:author" content="King">
-<meta property="article:tag" content="java,程序员，生活，随笔">
+<meta property="article:tag" content="进程同步">
 <meta name="twitter:card" content="summary">
 
 
@@ -166,13 +168,13 @@
 
 
 
-  <link rel="canonical" href="https://jinzewang.github.io/categories/java，java-extends/"/>
+  <link rel="canonical" href="https://jinzewang.github.io/_posts/process_sys/"/>
 
 
 
 
 
-  <title>Category: java，java extends | King's Blog</title>
+  <title>经典进程同步问题 | King's Blog</title>
   
 
 
@@ -201,7 +203,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -339,55 +341,209 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>java，java extends<small>Category</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/_posts/process_sys/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="King's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/_posts/java_extends/HashMap/" itemprop="url">
-              
-                <span itemprop="name">HashMap学习与理解</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">经典进程同步问题</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2021-05-16T15:45:46+08:00"
-              content="2021-05-16" >
-          05-16
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/_posts/process_sys/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/_posts/process_sys/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/_posts/process_sys/" class="leancloud_visitors" data-flag-title="经典进程同步问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
+<span id="more"></span>
+
+<h6 id="1、使用记录型信号量解决"><a href="#1、使用记录型信号量解决" class="headerlink" title="1、使用记录型信号量解决"></a>1、使用记录型信号量解决</h6><p>记录性信号量主要是在整型信号量的基础上增加了用于记录等待进程的链表。由问题描述知我们需要解决同步和互斥两个问题。因此设置n为临界资源数量，构建数组存储资源，只有n&gt;0才能存入生产的产品，消费者也才能获取产品。使用mutex作为互斥信号量。</p>
+<p>代码描述如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">int in &#x3D; 0, out &#x3D; 0;</span><br><span class="line">item[n] buffer;</span><br><span class="line">semaphore mutex &#x3D; 1, empty &#x3D; n, full &#x3D; 0;</span><br><span class="line">void producer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        producer anitem nextp;</span><br><span class="line">        ...</span><br><span class="line">        wait(empty);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        buffer[in] &#x3D; nextp;</span><br><span class="line">        in :&#x3D; (in+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">    &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        wait(full);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        nextc &#x3D; buffer[out];</span><br><span class="line">        out &#x3D; (out+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">    	consumer the item in nextc;</span><br><span class="line">    &#125;Wwhile(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释：mutex作为互斥信号量，empty作为临界资源数量，full表示可用产品数量。producer函数中使用signal(full)表示对消费者可用数量的增加，以便消费者的wait(full)可继续运行，以此保证了同步。</p>
+<p>注意的是：wait和signal是成对出现的，而mutex初始值为1，以保证互斥访问。并且，同步层是在互斥层“外”的，顺序不能变。</p>
+<p><strong>为什么同步层是外层，而互斥层是内层？</strong></p>
+<p>现假设互斥层为外层，同步层为内层。当生产者生产产品进入缓冲区，即调用wait(mutex)，此时锁定了临界资源以实现互斥，继续调用wait(empty)，若<strong>empty=0，</strong>那么将引起阻塞，临界资源将不可更改。此时的状态是：producer等着consumer将产品消费(signal(empty))，而consumer等着producer将占着的临界资源释放(即signal(mutex))，于是开始循环等待，形成了死锁。因此必须<strong>保证同步在外层，互斥在内层。</strong></p>
+<h6 id="2、使用AND信号量解决"><a href="#2、使用AND信号量解决" class="headerlink" title="2、使用AND信号量解决"></a>2、使用AND信号量解决</h6><p>主要使用AND信号量的特性一次性解决生产者-消费者问题的同步性和互斥行。AND信号量特性是一次性把所有临界资源分配给一个进程（要么拥有全部，要么一个也不能拥有）。即为用Swait(empty, mutex)替代wait(empty)和wait(mutex)，用Ssignal(mutex, full)替代signal(mutex)和signal(full)。consumer中也是如此。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    King
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://jinzewang.github.io/_posts/process_sys/" title="经典进程同步问题">https://jinzewang.github.io/_posts/process_sys/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/" rel="tag"># 进程同步</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/_posts/jvm_foundation/" rel="prev" title="java引用理解">
+                java引用理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -395,6 +551,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -417,8 +580,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -525,6 +697,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%94%9F%E4%BA%A7%E8%80%85-%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">一、生产者-消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1%E3%80%81%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95%E5%9E%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%A7%A3%E5%86%B3"><span class="nav-number">1.2.</span> <span class="nav-text">1、使用记录型信号量解决</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2%E3%80%81%E4%BD%BF%E7%94%A8AND%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%A7%A3%E5%86%B3"><span class="nav-number">1.3.</span> <span class="nav-text">2、使用AND信号量解决</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -689,6 +877,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
