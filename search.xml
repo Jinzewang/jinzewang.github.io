@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>java引用理解</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<hr>
+<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
+<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
+<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
+<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>经典进程同步问题</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -25,32 +42,17 @@
       </tags>
   </entry>
   <entry>
-    <title>java引用理解</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<hr>
-<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
-<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
-<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
-<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我就是我</title>
     <url>/2021/05/27/</url>
     <content><![CDATA[<hr>
-<h4 id="主要的"><a href="#主要的" class="headerlink" title="主要的"></a>主要的</h4><p>MySQL基础——&gt;<a href="https://juejin.cn/post/6959085197644005407">MySQL基础</a>与进阶——&gt;掘金（<a href="https://juejin.cn/user/122766317588637">谦虚的小叮当</a>）</p>
+<h4 id="主要的flag"><a href="#主要的flag" class="headerlink" title="主要的flag"></a>主要的flag</h4><p>MySQL基础——&gt;<a href="https://juejin.cn/post/6959085197644005407">MySQL基础</a>与进阶——&gt;掘金（<a href="https://juejin.cn/user/122766317588637">谦虚的小叮当</a>）</p>
 <p>JVM——&gt;G1 GC收集器的学习，性能调优，复习内存模型和回收算法</p>
 <p>Spring/SpringMVC    学习（微信武哥学编程）</p>
 <p>数据结构——&gt;B树和B+树，红黑树</p>
 <p>继续刷剑指offer——&gt;向中等难度进阶</p>
 <p>学习Linux简单命令/shell脚本</p>
+<p>完善HashMap源码学习</p>
+<p>继续StringBuffer/StringBuilder源码学习，深入复习ArrayList/LinkedList学习</p>
 ]]></content>
       <categories>
         <category>java</category>

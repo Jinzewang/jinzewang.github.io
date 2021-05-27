@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-05-27T06:34:09.782Z</updated>
+  <updated>2021-05-27T06:39:57.820Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jinzewang.github.io/2021/05/27/"/>
     <id>https://jinzewang.github.io/2021/05/27/</id>
     <published>2021-05-27T06:34:09.781Z</published>
-    <updated>2021-05-27T06:34:09.782Z</updated>
+    <updated>2021-05-27T06:39:57.820Z</updated>
     
     
       
@@ -29,7 +29,7 @@
         
         
     <summary type="html">&lt;hr&gt;
-&lt;h4 id=&quot;主要的&quot;&gt;&lt;a href=&quot;#主要的&quot; class=&quot;headerlink&quot; title=&quot;主要的&quot;&gt;&lt;/a&gt;主要的&lt;/h4&gt;&lt;p&gt;MySQL基础——&amp;gt;&lt;a</summary>
+&lt;h4 id=&quot;主要的flag&quot;&gt;&lt;a href=&quot;#主要的flag&quot; class=&quot;headerlink&quot; title=&quot;主要的flag&quot;&gt;&lt;/a&gt;主要的flag&lt;/h4&gt;&lt;p&gt;MySQL基础——&amp;gt;&lt;a</summary>
         
       
     
@@ -92,26 +92,6 @@
   </entry>
   
   <entry>
-    <title>经典进程同步问题</title>
-    <link href="https://jinzewang.github.io/2021/04/05/"/>
-    <id>https://jinzewang.github.io/2021/04/05/</id>
-    <published>2021-04-05T11:57:44.865Z</published>
-    <updated>2021-05-18T09:17:52.053Z</updated>
-    
-    
-    <summary type="html">&lt;hr&gt;
-&lt;h5 id=&quot;一、生产者-消费者问题&quot;&gt;&lt;a href=&quot;#一、生产者-消费者问题&quot; class=&quot;headerlink&quot; title=&quot;一、生产者-消费者问题&quot;&gt;&lt;/a&gt;一、生产者-消费者问题&lt;/h5&gt;&lt;h6 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h6&gt;&lt;p&gt;生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="操作系统" scheme="https://jinzewang.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="进程同步" scheme="https://jinzewang.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
     <title>java引用理解</title>
     <link href="https://jinzewang.github.io/2021/04/05/"/>
     <id>https://jinzewang.github.io/2021/04/05/</id>
@@ -136,6 +116,26 @@
     <category term="java" scheme="https://jinzewang.github.io/tags/java/"/>
     
     <category term="JVM" scheme="https://jinzewang.github.io/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>经典进程同步问题</title>
+    <link href="https://jinzewang.github.io/2021/04/05/"/>
+    <id>https://jinzewang.github.io/2021/04/05/</id>
+    <published>2021-04-05T11:57:44.865Z</published>
+    <updated>2021-05-18T09:17:52.053Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+&lt;h5 id=&quot;一、生产者-消费者问题&quot;&gt;&lt;a href=&quot;#一、生产者-消费者问题&quot; class=&quot;headerlink&quot; title=&quot;一、生产者-消费者问题&quot;&gt;&lt;/a&gt;一、生产者-消费者问题&lt;/h5&gt;&lt;h6 id=&quot;问题描述：&quot;&gt;&lt;a href=&quot;#问题描述：&quot; class=&quot;headerlink&quot; title=&quot;问题描述：&quot;&gt;&lt;/a&gt;问题描述：&lt;/h6&gt;&lt;p&gt;生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="操作系统" scheme="https://jinzewang.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="进程同步" scheme="https://jinzewang.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
     
   </entry>
   
