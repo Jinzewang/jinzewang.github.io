@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ArrayList和LinkedList的区别</title>
+    <url>/2021/06/26/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java扩展</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>区别</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一起学习HashMap</title>
     <url>/2021/05/16/</url>
     <content><![CDATA[<hr>
@@ -48,19 +61,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ArrayList和LinkedList的区别</title>
-    <url>/2021/06/26/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java扩展</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>区别</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java引用理解</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -89,6 +89,58 @@
       <tags>
         <tag>Java</tag>
         <tag>Java字节码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java基础查漏补缺</title>
+    <url>/2021/06/26/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>子曰：“ 温故而知新，可以为师矣！” ——《论语<strong>·</strong>为政篇》</p>
+</blockquote>
+<h5 id="Java概述篇"><a href="#Java概述篇" class="headerlink" title="Java概述篇"></a>Java概述篇</h5><p>1 Java是解释性语言，针对字节码文件（.class）解释执行，这就大大提高了程序的可移植性，而非像C/C++一样需要编译成二进制文件执行。</p>
+<p>2 jdk包含了JRE，javac.exe和java.exe以及Java其他所需工具，包括文档等。</p>
+<span id="more"></span>
+
+<p>3 浮点类型数据，float类型能保证的精度为6位，即有效数字范围是6<del>7位，而double类型是15</del>16位。这是由于浮点数在计算机中的保存方式决定的。</p>
+<p>4 Unicode字符集的范围是”\u0000 ~ \uffff”，\u表使用Unicode编码，后四位十六进制，占两字节，共包含65535个字符。</p>
+<h5 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h5><p>1 switch语句所允许的类型有byte，short，int，long，char和String等引用类型。</p>
+<p>2 访问修饰符：native修饰符，即本地修饰符，说明该方法是使用其他语言在程序外部编写的。</p>
+<h6 id="方法的重载-重写"><a href="#方法的重载-重写" class="headerlink" title="方法的重载/重写"></a>方法的重载/重写</h6><p>重载：同一个类中相同方法名不同的参数列表（参数类型、顺序、个数不同）。</p>
+<p>重写：子类重写父类中的方法，与重载都是多态的体现，但是子类重写的方法与父类的方法返回值类型相同，方法名相同，参数列表也相同（参数类型、顺序和个数）。</p>
+<p><strong>重写需要注意的是</strong></p>
+<p>1 重写方法的权限不能缩小原方法的权限，只能相同或扩大</p>
+<p>2 不能重写被final、static修饰的方法</p>
+<p>3 重写方法中不能抛出比父类更多的异常</p>
+<h6 id="方法参数传递方式"><a href="#方法参数传递方式" class="headerlink" title="方法参数传递方式"></a>方法参数传递方式</h6><p>值传递：对于基本数据类型作参数时，使用值传递，即传递的是基本数据类型值的副本，与原数据具有不同的地址空间。即在方法中修改该参数时不影响原数据。</p>
+<p>地址传递：对于实参引用传递，参数接收到的是地址，在方法中修改该引用后会影响原数据。</p>
+<h5 id="深入理解类及其成员"><a href="#深入理解类及其成员" class="headerlink" title="深入理解类及其成员"></a>深入理解类及其成员</h5><p>1 关于“句柄”的理解：在栈中定义的变量的值是一个堆内地址，该地址是数组或对象在堆中的存储位置，该堆内地址就是<strong>句柄</strong>。当超出栈中定义变量的作用域后，该栈中变量的空间会被释放（此刻堆中地址变成了不可达数组或对象），但是堆中的数组或对象仍存在，只会等待JVM自动回收机制回收。</p>
+<h5 id="继承、抽象类和接口以及多态"><a href="#继承、抽象类和接口以及多态" class="headerlink" title="继承、抽象类和接口以及多态"></a>继承、抽象类和接口以及多态</h5><p>1 Object是顶级父类，它的equals方法实现</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从这里来看所有对象调用equals方法比较都是地址，但是String类重写了该方法，变成了比较两个字符串的内容是否相同。因此String.equals()是比较内容是否相同，而 == 是比较地址是否相同。</p>
+<p>2 接口中只能有常量、抽象方法和默认方法（java8新特性）三种成员。且不能用private，protected或default修饰。即只能public。</p>
+<h5 id="数组与集合"><a href="#数组与集合" class="headerlink" title="数组与集合"></a>数组与集合</h5><p>1 HashTable的键不能为空且具有唯一性，值可以为空。</p>
+<h5 id="异常和异常处理"><a href="#异常和异常处理" class="headerlink" title="异常和异常处理"></a>异常和异常处理</h5><p><a href="">详见这里</a></p>
+<h5 id="输入输出与文件管理"><a href="#输入输出与文件管理" class="headerlink" title="输入输出与文件管理"></a>输入输出与文件管理</h5><p>1 字节流的基本单位是字节，而字符流的单位是字符，一个字符是2~3（汉语）个字节。</p>
+<p>2 InputStream/OutputStream更加适用处理图片，音视频等二进制文件。</p>
+<p>3 “缓冲流”中的缓冲区是从内存分出的区域，是为了解决内存与磁盘的速度匹配问题。</p>
+<p>4 序列化是指把需要持久化的对象用字节流的形式保存到外部文件中，反序列化就是拿出来恢复成对象。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/javaFocus_Serializable_transient.png" style="zoom: 67%;" /></p>
+<h5 id="数据库编程"><a href="#数据库编程" class="headerlink" title="数据库编程"></a>数据库编程</h5><h6 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h6><p>1 一般过程：加载驱动——&gt;通过DriverManager创建链接对象——&gt;通过该对象创建Statement接口引用——&gt;通过该引用执行相应的sql语句——&gt;（得到结果集ResultSet）——&gt;释放资源</p>
+<p>2 MySQL的URL写法：jdbc:mysql://主机名或IP:端口//数据库</p>
+<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><h6 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h6><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/MultiTreadProcess.png"></p>
+<p>1 多线程实现的两种方式，继承Thread和实现Runable接口，Thread实际上也实现了Runable接口。</p>
+<p>2 匿名线程中run()方法只能调用一次</p>
+<p>3 ReentrantLock可重入锁，遵循了有限等待原则</p>
+<p>4 <strong>生产者消费者问题</strong>wait()，notify()，notifyAll().</p>
+<h5 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h5>]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java查漏补缺</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>重点</tag>
       </tags>
   </entry>
   <entry>
@@ -149,58 +201,6 @@
       <tags>
         <tag>Java</tag>
         <tag>Lock</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java基础查漏补缺</title>
-    <url>/2021/06/26/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>子曰：“ 温故而知新，可以为师矣！” ——《论语<strong>·</strong>为政篇》</p>
-</blockquote>
-<h5 id="Java概述篇"><a href="#Java概述篇" class="headerlink" title="Java概述篇"></a>Java概述篇</h5><p>1 Java是解释性语言，针对字节码文件（.class）解释执行，这就大大提高了程序的可移植性，而非像C/C++一样需要编译成二进制文件执行。</p>
-<p>2 jdk包含了JRE，javac.exe和java.exe以及Java其他所需工具，包括文档等。</p>
-<span id="more"></span>
-
-<p>3 浮点类型数据，float类型能保证的精度为6位，即有效数字范围是6<del>7位，而double类型是15</del>16位。这是由于浮点数在计算机中的保存方式决定的。</p>
-<p>4 Unicode字符集的范围是”\u0000 ~ \uffff”，\u表使用Unicode编码，后四位十六进制，占两字节，共包含65535个字符。</p>
-<h5 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h5><p>1 switch语句所允许的类型有byte，short，int，long，char和String等引用类型。</p>
-<p>2 访问修饰符：native修饰符，即本地修饰符，说明该方法是使用其他语言在程序外部编写的。</p>
-<h6 id="方法的重载-重写"><a href="#方法的重载-重写" class="headerlink" title="方法的重载/重写"></a>方法的重载/重写</h6><p>重载：同一个类中相同方法名不同的参数列表（参数类型、顺序、个数不同）。</p>
-<p>重写：子类重写父类中的方法，与重载都是多态的体现，但是子类重写的方法与父类的方法返回值类型相同，方法名相同，参数列表也相同（参数类型、顺序和个数）。</p>
-<p><strong>重写需要注意的是</strong></p>
-<p>1 重写方法的权限不能缩小原方法的权限，只能相同或扩大</p>
-<p>2 不能重写被final、static修饰的方法</p>
-<p>3 重写方法中不能抛出比父类更多的异常</p>
-<h6 id="方法参数传递方式"><a href="#方法参数传递方式" class="headerlink" title="方法参数传递方式"></a>方法参数传递方式</h6><p>值传递：对于基本数据类型作参数时，使用值传递，即传递的是基本数据类型值的副本，与原数据具有不同的地址空间。即在方法中修改该参数时不影响原数据。</p>
-<p>地址传递：对于实参引用传递，参数接收到的是地址，在方法中修改该引用后会影响原数据。</p>
-<h5 id="深入理解类及其成员"><a href="#深入理解类及其成员" class="headerlink" title="深入理解类及其成员"></a>深入理解类及其成员</h5><p>1 关于“句柄”的理解：在栈中定义的变量的值是一个堆内地址，该地址是数组或对象在堆中的存储位置，该堆内地址就是<strong>句柄</strong>。当超出栈中定义变量的作用域后，该栈中变量的空间会被释放（此刻堆中地址变成了不可达数组或对象），但是堆中的数组或对象仍存在，只会等待JVM自动回收机制回收。</p>
-<h5 id="继承、抽象类和接口以及多态"><a href="#继承、抽象类和接口以及多态" class="headerlink" title="继承、抽象类和接口以及多态"></a>继承、抽象类和接口以及多态</h5><p>1 Object是顶级父类，它的equals方法实现</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">this</span> == object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从这里来看所有对象调用equals方法比较都是地址，但是String类重写了该方法，变成了比较两个字符串的内容是否相同。因此String.equals()是比较内容是否相同，而 == 是比较地址是否相同。</p>
-<p>2 接口中只能有常量、抽象方法和默认方法（java8新特性）三种成员。且不能用private，protected或default修饰。即只能public。</p>
-<h5 id="数组与集合"><a href="#数组与集合" class="headerlink" title="数组与集合"></a>数组与集合</h5><p>1 HashTable的键不能为空且具有唯一性，值可以为空。</p>
-<h5 id="异常和异常处理"><a href="#异常和异常处理" class="headerlink" title="异常和异常处理"></a>异常和异常处理</h5><p><a href="">详见这里</a></p>
-<h5 id="输入输出与文件管理"><a href="#输入输出与文件管理" class="headerlink" title="输入输出与文件管理"></a>输入输出与文件管理</h5><p>1 字节流的基本单位是字节，而字符流的单位是字符，一个字符是2~3（汉语）个字节。</p>
-<p>2 InputStream/OutputStream更加适用处理图片，音视频等二进制文件。</p>
-<p>3 “缓冲流”中的缓冲区是从内存分出的区域，是为了解决内存与磁盘的速度匹配问题。</p>
-<p>4 序列化是指把需要持久化的对象用字节流的形式保存到外部文件中，反序列化就是拿出来恢复成对象。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/javaFocus_Serializable_transient.png" style="zoom: 67%;" /></p>
-<h5 id="数据库编程"><a href="#数据库编程" class="headerlink" title="数据库编程"></a>数据库编程</h5><h6 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h6><p>1 一般过程：加载驱动——&gt;通过DriverManager创建链接对象——&gt;通过该对象创建Statement接口引用——&gt;通过该引用执行相应的sql语句——&gt;（得到结果集ResultSet）——&gt;释放资源</p>
-<p>2 MySQL的URL写法：jdbc:mysql://主机名或IP:端口//数据库</p>
-<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><h6 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h6><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/MultiTreadProcess.png"></p>
-<p>1 多线程实现的两种方式，继承Thread和实现Runable接口，Thread实际上也实现了Runable接口。</p>
-<p>2 匿名线程中run()方法只能调用一次</p>
-<p>3 ReentrantLock可重入锁，遵循了有限等待原则</p>
-<p>4 <strong>生产者消费者问题</strong>wait()，notify()，notifyAll().</p>
-<h5 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h5>]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java查漏补缺</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>重点</tag>
       </tags>
   </entry>
   <entry>
