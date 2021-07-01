@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-05-27T06:39:57.820Z</updated>
+  <updated>2021-07-01T08:30:50.972Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>我就是我</title>
-    <link href="https://jinzewang.github.io/2021/05/27/"/>
-    <id>https://jinzewang.github.io/2021/05/27/</id>
-    <published>2021-05-27T06:34:09.781Z</published>
-    <updated>2021-05-27T06:39:57.820Z</updated>
+    <title>计算机网络之TCP的三次、四次挥手</title>
+    <link href="https://jinzewang.github.io/2021/07/01/"/>
+    <id>https://jinzewang.github.io/2021/07/01/</id>
+    <published>2021-07-01T07:34:27.967Z</published>
+    <updated>2021-07-01T08:30:50.972Z</updated>
     
     
       
@@ -29,18 +29,190 @@
         
         
     <summary type="html">&lt;hr&gt;
-&lt;h4 id=&quot;主要的flag&quot;&gt;&lt;a href=&quot;#主要的flag&quot; class=&quot;headerlink&quot; title=&quot;主要的flag&quot;&gt;&lt;/a&gt;主要的flag&lt;/h4&gt;&lt;p&gt;MySQL基础——&amp;gt;&lt;a</summary>
+</summary>
         
       
     
     
     
-    <category term="java" scheme="https://jinzewang.github.io/categories/java/"/>
+    <category term="计算机网络" scheme="https://jinzewang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="三次握手四次挥手" scheme="https://jinzewang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/"/>
     
     
-    <category term="学习路线" scheme="https://jinzewang.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
+    <category term="计算机网络" scheme="https://jinzewang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
-    <category term="求实习" scheme="https://jinzewang.github.io/tags/%E6%B1%82%E5%AE%9E%E4%B9%A0/"/>
+    <category term="TCP" scheme="https://jinzewang.github.io/tags/TCP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java关于锁的学习</title>
+    <link href="https://jinzewang.github.io/2021/06/29/"/>
+    <id>https://jinzewang.github.io/2021/06/29/</id>
+    <published>2021-06-29T03:25:24.068Z</published>
+    <updated>2021-06-29T03:25:24.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;/blockquote&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="Java基础" scheme="https://jinzewang.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="Lock" scheme="https://jinzewang.github.io/tags/Lock/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ArrayList和LinkedList的区别</title>
+    <link href="https://jinzewang.github.io/2021/06/26/"/>
+    <id>https://jinzewang.github.io/2021/06/26/</id>
+    <published>2021-06-26T15:30:26.646Z</published>
+    <updated>2021-06-26T15:32:05.604Z</updated>
+    
+    
+    
+    
+    <category term="Java_extends" scheme="https://jinzewang.github.io/categories/Java-extends/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="区别" scheme="https://jinzewang.github.io/tags/%E5%8C%BA%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础查漏补缺</title>
+    <link href="https://jinzewang.github.io/2021/06/26/"/>
+    <id>https://jinzewang.github.io/2021/06/26/</id>
+    <published>2021-06-26T01:45:36.224Z</published>
+    <updated>2021-06-29T03:34:08.275Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;子曰：“ 温故而知新，可以为师矣！” ——《论语&lt;strong&gt;·&lt;/strong&gt;为政篇》&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;Java概述篇&quot;&gt;&lt;a href=&quot;#Java概述篇&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java基础" scheme="https://jinzewang.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="重点" scheme="https://jinzewang.github.io/tags/%E9%87%8D%E7%82%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java字节码执行机制</title>
+    <link href="https://jinzewang.github.io/2021/06/25/"/>
+    <id>https://jinzewang.github.io/2021/06/25/</id>
+    <published>2021-06-25T02:22:51.672Z</published>
+    <updated>2021-06-25T02:22:51.673Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="Java基础" scheme="https://jinzewang.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="Java字节码" scheme="https://jinzewang.github.io/tags/Java%E5%AD%97%E8%8A%82%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java反射机制</title>
+    <link href="https://jinzewang.github.io/2021/06/05/"/>
+    <id>https://jinzewang.github.io/2021/06/05/</id>
+    <published>2021-06-05T09:53:35.165Z</published>
+    <updated>2021-06-24T09:41:35.899Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;举杯邀明月，对影成三人。——《月下独酌四首》—唐&lt;strong&gt;·&lt;/strong&gt;李白&lt;/p&gt;
+&lt;/blockquote&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="Java基础" scheme="https://jinzewang.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="Java反射" scheme="https://jinzewang.github.io/tags/Java%E5%8F%8D%E5%B0%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一起看看Java异常</title>
+    <link href="https://jinzewang.github.io/2021/06/04/"/>
+    <id>https://jinzewang.github.io/2021/06/04/</id>
+    <published>2021-06-04T15:05:32.100Z</published>
+    <updated>2021-06-24T09:25:09.726Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋&lt;code&gt;·&lt;/code&gt;陆游&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;异常总述&quot;&gt;&lt;a href=&quot;#异常总述&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Java基础" scheme="https://jinzewang.github.io/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/tags/Java/"/>
+    
+    <category term="Exception" scheme="https://jinzewang.github.io/tags/Exception/"/>
     
   </entry>
   
