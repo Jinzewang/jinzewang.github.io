@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jinzewang.github.io/loveforever/index.html</loc>
+    <loc>https://jinzewang.github.io/2021/06/26/</loc>
+    
+    <lastmod>2021-07-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jinzewang.github.io/2021/06/04/</loc>
+    
+    <lastmod>2021-07-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jinzewang.github.io/2021/05/16/</loc>
+    
+    <lastmod>2021-07-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jinzewang.github.io/2021/06/26/</loc>
+    
+    <lastmod>2021-07-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jinzewang.github.io/2021/06/25/</loc>
+    
+    <lastmod>2021-07-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jinzewang.github.io/2021/06/05/</loc>
     
     <lastmod>2021-07-01</lastmod>
     
@@ -16,51 +51,16 @@
   </url>
   
   <url>
-    <loc>https://jinzewang.github.io/2021/06/26/</loc>
-    
-    <lastmod>2021-06-29</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jinzewang.github.io/2021/06/29/</loc>
     
-    <lastmod>2021-06-29</lastmod>
+    <lastmod>2021-07-01</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jinzewang.github.io/2021/06/26/</loc>
+    <loc>https://jinzewang.github.io/loveforever/index.html</loc>
     
-    <lastmod>2021-06-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jinzewang.github.io/2021/06/25/</loc>
-    
-    <lastmod>2021-06-25</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jinzewang.github.io/2021/06/05/</loc>
-    
-    <lastmod>2021-06-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jinzewang.github.io/2021/06/04/</loc>
-    
-    <lastmod>2021-06-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jinzewang.github.io/2021/05/16/</loc>
-    
-    <lastmod>2021-06-01</lastmod>
+    <lastmod>2021-07-01</lastmod>
     
   </url>
   
@@ -165,13 +165,6 @@
   </url>
   
   <url>
-    <loc>https://jinzewang.github.io/tags/Lock/</loc>
-    <lastmod>2021-07-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jinzewang.github.io/tags/Exception/</loc>
     <lastmod>2021-07-01</lastmod>
     <changefreq>daily</changefreq>
@@ -227,17 +220,17 @@
     <priority>0.6</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://jinzewang.github.io/categories/Java-extends/</loc>
+    <loc>https://jinzewang.github.io/tags/Lock/</loc>
     <lastmod>2021-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://jinzewang.github.io/categories/java-extends/</loc>
+    <loc>https://jinzewang.github.io/categories/Java-extends/</loc>
     <lastmod>2021-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-07-01T08:30:50.972Z</updated>
+  <updated>2021-07-01T11:01:20.791Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jinzewang.github.io/2021/07/01/"/>
     <id>https://jinzewang.github.io/2021/07/01/</id>
     <published>2021-07-01T07:34:27.967Z</published>
-    <updated>2021-07-01T08:30:50.972Z</updated>
+    <updated>2021-07-01T11:01:20.791Z</updated>
     
     
       
@@ -51,7 +51,7 @@
     <link href="https://jinzewang.github.io/2021/06/29/"/>
     <id>https://jinzewang.github.io/2021/06/29/</id>
     <published>2021-06-29T03:25:24.068Z</published>
-    <updated>2021-06-29T03:25:24.069Z</updated>
+    <updated>2021-07-01T11:01:20.791Z</updated>
     
     
       
@@ -81,7 +81,7 @@
     <link href="https://jinzewang.github.io/2021/06/26/"/>
     <id>https://jinzewang.github.io/2021/06/26/</id>
     <published>2021-06-26T15:30:26.646Z</published>
-    <updated>2021-06-26T15:32:05.604Z</updated>
+    <updated>2021-07-01T11:01:20.791Z</updated>
     
     
     
@@ -100,20 +100,15 @@
     <link href="https://jinzewang.github.io/2021/06/26/"/>
     <id>https://jinzewang.github.io/2021/06/26/</id>
     <published>2021-06-26T01:45:36.224Z</published>
-    <updated>2021-06-29T03:34:08.275Z</updated>
+    <updated>2021-07-01T11:09:06.486Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;子曰：“ 温故而知新，可以为师矣！” ——《论语&lt;strong&gt;·&lt;/strong&gt;为政篇》&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h5 id=&quot;Java概述篇&quot;&gt;&lt;a href=&quot;#Java概述篇&quot;</summary>
-        
-      
+&lt;h5 id=&quot;Java概述篇&quot;&gt;&lt;a href=&quot;#Java概述篇&quot; class=&quot;headerlink&quot; title=&quot;Java概述篇&quot;&gt;&lt;/a&gt;Java概述篇&lt;/h5&gt;&lt;p&gt;1 Java是解释性语言，针对字节码文件（.class）解释执行，这就大大提高了程序的可移植性，而非像C/C++一样需要编译成二进制文件执行。&lt;/p&gt;
+&lt;p&gt;2 jdk包含了JRE，javac.exe和java.exe以及Java其他所需工具，包括文档等。&lt;/p&gt;</summary>
     
     
     
@@ -131,7 +126,7 @@
     <link href="https://jinzewang.github.io/2021/06/25/"/>
     <id>https://jinzewang.github.io/2021/06/25/</id>
     <published>2021-06-25T02:22:51.672Z</published>
-    <updated>2021-06-25T02:22:51.673Z</updated>
+    <updated>2021-07-01T11:01:20.791Z</updated>
     
     
       
@@ -159,7 +154,7 @@
     <link href="https://jinzewang.github.io/2021/06/05/"/>
     <id>https://jinzewang.github.io/2021/06/05/</id>
     <published>2021-06-05T09:53:35.165Z</published>
-    <updated>2021-06-24T09:41:35.899Z</updated>
+    <updated>2021-07-01T11:01:20.791Z</updated>
     
     
       
@@ -190,20 +185,14 @@
     <link href="https://jinzewang.github.io/2021/06/04/"/>
     <id>https://jinzewang.github.io/2021/06/04/</id>
     <published>2021-06-04T15:05:32.100Z</published>
-    <updated>2021-06-24T09:25:09.726Z</updated>
+    <updated>2021-07-01T11:08:25.774Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋&lt;code&gt;·&lt;/code&gt;陆游&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h5 id=&quot;异常总述&quot;&gt;&lt;a href=&quot;#异常总述&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+&lt;h5 id=&quot;异常总述&quot;&gt;&lt;a href=&quot;#异常总述&quot; class=&quot;headerlink&quot; title=&quot;异常总述&quot;&gt;&lt;/a&gt;异常总述&lt;/h5&gt;&lt;h6 id=&quot;总述&quot;&gt;&lt;a href=&quot;#总述&quot; class=&quot;headerlink&quot; title=&quot;总述&quot;&gt;&lt;/a&gt;总述&lt;/h6&gt;&lt;p&gt;异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。&lt;/p&gt;</summary>
     
     
     
@@ -221,7 +210,7 @@
     <link href="https://jinzewang.github.io/2021/05/16/"/>
     <id>https://jinzewang.github.io/2021/05/16/</id>
     <published>2021-05-16T07:45:46.450Z</published>
-    <updated>2021-06-01T03:53:18.307Z</updated>
+    <updated>2021-07-01T11:06:27.756Z</updated>
     
     
     <summary type="html">&lt;hr&gt;
@@ -233,7 +222,7 @@
     
     
     
-    <category term="java_extends" scheme="https://jinzewang.github.io/categories/java-extends/"/>
+    <category term="Java_extends" scheme="https://jinzewang.github.io/categories/Java-extends/"/>
     
     
     <category term="java" scheme="https://jinzewang.github.io/tags/java/"/>

@@ -52,7 +52,7 @@
 <p>关于ConcurrentHashMap的深入研究被挂起，等到进一步源码学习^%_*^</p>
 ]]></content>
       <categories>
-        <category>java_extends</category>
+        <category>Java_extends</category>
       </categories>
       <tags>
         <tag>java</tag>
@@ -90,21 +90,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java关于锁的学习</title>
-    <url>/2021/06/29/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Lock</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一起看看Java异常</title>
     <url>/2021/06/04/</url>
     <content><![CDATA[<hr>
@@ -112,6 +97,8 @@
 <p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
 </blockquote>
 <h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
+<span id="more"></span>
+
 <h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
 <h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
 <img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
@@ -154,6 +141,8 @@
 </blockquote>
 <h5 id="Java概述篇"><a href="#Java概述篇" class="headerlink" title="Java概述篇"></a>Java概述篇</h5><p>1 Java是解释性语言，针对字节码文件（.class）解释执行，这就大大提高了程序的可移植性，而非像C/C++一样需要编译成二进制文件执行。</p>
 <p>2 jdk包含了JRE，javac.exe和java.exe以及Java其他所需工具，包括文档等。</p>
+<span id="more"></span>
+
 <p>3 浮点类型数据，float类型能保证的精度为6位，即有效数字范围是6<del>7位，而double类型是15</del>16位。这是由于浮点数在计算机中的保存方式决定的。</p>
 <p>4 Unicode字符集的范围是”\u0000 ~ \uffff”，\u表使用Unicode编码，后四位十六进制，占两字节，共包含65535个字符。</p>
 <h5 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h5><p>1 switch语句所允许的类型有byte，short，int，long，char和String等引用类型。</p>
@@ -269,6 +258,21 @@
       <tags>
         <tag>计算机网络</tag>
         <tag>TCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java关于锁的学习</title>
+    <url>/2021/06/29/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Lock</tag>
       </tags>
   </entry>
 </search>
