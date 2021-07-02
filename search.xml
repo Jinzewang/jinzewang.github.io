@@ -14,6 +14,21 @@
       </tags>
   </entry>
   <entry>
+    <title>计算机网络之流量控制和拥塞控制</title>
+    <url>/2021/07/02/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+        <category>流量控制与拥塞控制</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>流量控制</tag>
+        <tag>拥塞控制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一起学习HashMap</title>
     <url>/2021/05/16/</url>
     <content><![CDATA[<hr>
@@ -61,6 +76,20 @@
       </tags>
   </entry>
   <entry>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java字节码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java引用理解</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -73,22 +102,8 @@
         <category>JVM</category>
       </categories>
       <tags>
-        <tag>java</tag>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
-      </categories>
-      <tags>
         <tag>Java</tag>
-        <tag>Java字节码</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
@@ -124,7 +139,7 @@
 <h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
 <p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
 <p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
-<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBM978-7-111-62467-7</p>
+<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
 ]]></content>
       <categories>
         <category>Java基础</category>
@@ -221,9 +236,45 @@
       </tags>
   </entry>
   <entry>
-    <title>计算机网络之TCP的三次、四次挥手</title>
+    <title>计算机网络之TCP的三次握手、四次挥手</title>
     <url>/2021/07/01/</url>
     <content><![CDATA[<hr>
+<blockquote>
+<p>曾今沧海难为水，除去巫山不是云。  ——《离思》<strong>·</strong>元稹</p>
+</blockquote>
+<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>我们通常所说TCP的三次握手、四次挥手实际上是指TCP的建立连接和释放连接。TCP是计算机网络中运输层的一种可靠传输协议，属于面向连接的，它传输的单位是报文段。</p>
+<span id="more"></span>
+
+<h5 id="TCP建立连接（三次握手）"><a href="#TCP建立连接（三次握手）" class="headerlink" title="TCP建立连接（三次握手）"></a>TCP建立连接（三次握手）</h5><h6 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h6><p>1 TCP建立连接采用客户服务器模式，主动发起请求的是客户端，这里我们置为A，被动接受请求的是服务端，这里我们置为B。</p>
+<p>2 连接的两端实质是两个进程，三次握手实际是传输了三次报文段，在连接的过程中两方确定好他们进行通信的一些参数，例如最大窗口值，时间戳选项服务质量等<sup>[1]</sup>。</p>
+<p>3 最开始，服务器创建好传输控制块TCP，准备监听客户端进程的请求，自己进入监听（LISTEN）状态。若客户端需要与服务器建立连接，它也首先创建TCP，然后发送第一个报文段。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/threeWayHandshake.png"></p>
+<center><font size = 2>图1 三次握手</font></center>
+
+<h6 id="第一次握手"><a href="#第一次握手" class="headerlink" title="第一次握手"></a>第一次握手</h6><p>当确定A要和B建立连接时，A向B发送第一个报文段，把该报文段SYN标志位设为1，表示该报文段是一个连接请求报文段；把序号seq设为x，表示A发送的初始编号是x。该报文段是不携带数据的，但会消耗一个序号，此时A是SYN-SENT状态（同步已发送）</p>
+<h6 id="第二次握手"><a href="#第二次握手" class="headerlink" title="第二次握手"></a>第二次握手</h6><p>当B收到A发来的连接请求报文段后，若是同意连接请求，那么会发送连接接受报文段，该报文段首部中SYN=1，表示该报文段是连接接受报文段，ACK=1表示该确认报文段有效，ack=x+1表示B希望A发送的下一个序号，seq=y表示B发送的消耗序号，该报文段也是不携带数据的，只消耗掉一个序号。然后B进入SYN-REVD状态。</p>
+<h6 id="第三次握手"><a href="#第三次握手" class="headerlink" title="第三次握手"></a>第三次握手</h6><p>当A收到B发来的连接接受报文段后，需要再次向B发送确认报文段，此时并通知A的上层应用进程，TCP已经建立，可以开始传输数据了。而A发送的确认报文段首部中，seq=x+1表示A发送的字节流中第一个序号是x+1，并希望收到的下一个确认号是y+1，即把ack设为y+1。此报文段可以携带数据也可不携带数据，若不携带则不消耗序号，即可能下一个报文段序号仍可能是x+1，此时A进入ESTAB-LISTEN状态。</p>
+<h6 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h6><p>当B收到A发来的确认报文段后，自己也进入ESTAB-LISTEN状态。A与B开始进行数据传输。</p>
+<p><strong>A再次发送确认报文段的目的</strong>（第三次握手目的）</p>
+<p>为了防止已失效的连接请求报文段又发送一次给B，这种情况可能是由于A原来发送的连接请求报文段丢失或是其他异常情况。</p>
+<h5 id="TCP释放连接（四次挥手）"><a href="#TCP释放连接（四次挥手）" class="headerlink" title="TCP释放连接（四次挥手）"></a>TCP释放连接（四次挥手）</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/fourWave.png"></p>
+<center><font size=2>图2 四次挥手</font></center>
+
+<p>当数据传输结束后，A和B都可以释放连接，若A要释放连接，首先向TCP发送连接释放报文段，并停止发送数据，应用进程主动关闭TCP连接。</p>
+<h6 id="第一次挥手"><a href="#第一次挥手" class="headerlink" title="第一次挥手"></a>第一次挥手</h6><p>A把连接释放报文段发送给B，并把报文段首部FIN=1，当前将不再发送数据，并要求B释放连接；同时发送自己的序号seq=u。</p>
+<h6 id="第二次挥手"><a href="#第二次挥手" class="headerlink" title="第二次挥手"></a>第二次挥手</h6><p>B收到A发来的连接释放报文段后，将会通知上层应用进程，并发送确认报文段，设置报文段首部ACK=1，表示报文段确认号是有效的，设置确认号ack=u+1，还发送自己的序号v。此时A——&gt;B这个方向的连接关闭，TCP处于<font color="red">半关闭状态</font>，若是B还要发送数据给A，A还是得接着。</p>
+<h6 id="第三次挥手"><a href="#第三次挥手" class="headerlink" title="第三次挥手"></a>第三次挥手</h6><p>若B不发送数据给A，那就通知进程关闭TCP连接，发送连接释放报文段给A，报文段首部FIN=1，表示不再发数据，连接释放，同时发送自己的序号w，确认号ack=u+1，并把ACK标志位置为1，表示该确认号是有效的。</p>
+<h6 id="第四次挥手"><a href="#第四次挥手" class="headerlink" title="第四次挥手"></a>第四次挥手</h6><p>A收到B发来的连接释放报文段后，仍需发送确认报文段给B，表示他知道了。首部各字段就不再赘述。同时此刻A还需等待等待时间2MSL时间过后才真正释放掉。</p>
+<p><strong>2MSL</strong>它是时间等待计时器设置时间，MSL是最长报文段寿命。</p>
+<p><strong>设置等待时间为2MSL的原因：</strong></p>
+<p>1 为了保证A发送的最后一个ACK报文段能到达B。</p>
+<p>2 为了防止上面提到的“已失效的连接请求报文段”出现在此连接中<sup>[1]</sup>。</p>
+<h5 id="TCP的有限状态机"><a href="#TCP的有限状态机" class="headerlink" title="TCP的有限状态机"></a>TCP的有限状态机</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/TCPLimitedStateMachine.png"></p>
+<h6 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h6><p>1 粗实线箭头表示客户进程的正常变迁</p>
+<p>2 粗虚线箭头表示对服务器进程的正常变迁</p>
+<p>3 细线箭头表示异常变迁</p>
+<p>该图能很好的表现TCP连接各个状态的及其之间的关系</p>
+<h5 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h5><p>[1] 谢希仁  计算机网络（第七版） [M] 北京：电子工业出版社 2017.1 ISBN 978-7-121-30295-4</p>
 ]]></content>
       <categories>
         <category>计算机网络</category>
