@@ -88,17 +88,20 @@
       </tags>
   </entry>
   <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
+    <title>java引用理解</title>
+    <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
+<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
+<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
+<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
+<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
 ]]></content>
       <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
+        <category>JVM</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Java字节码</tag>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
@@ -149,20 +152,17 @@
       </tags>
   </entry>
   <entry>
-    <title>java引用理解</title>
-    <url>/2021/04/05/</url>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
     <content><![CDATA[<hr>
-<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
-<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
-<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
-<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
 ]]></content>
       <categories>
-        <category>JVM</category>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
+        <tag>Java字节码</tag>
       </tags>
   </entry>
   <entry>
@@ -207,39 +207,6 @@
       <tags>
         <tag>Java</tag>
         <tag>Exception</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java反射机制</title>
-    <url>/2021/06/05/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java反射机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java反射</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java关于锁的学习</title>
-    <url>/2021/06/29/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java中的锁</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Lock</tag>
       </tags>
   </entry>
   <entry>
@@ -295,6 +262,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Java关于锁的学习</title>
+    <url>/2021/06/29/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java中的锁</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Lock</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射机制</title>
+    <url>/2021/06/05/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java反射机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java反射</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>经典进程同步问题</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -316,29 +316,6 @@
       </categories>
       <tags>
         <tag>进程同步</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>祝福</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>感想</tag>
       </tags>
   </entry>
   <entry>
@@ -389,6 +366,29 @@
       <tags>
         <tag>计算机网络</tag>
         <tag>TCP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>祝福</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>感想</tag>
       </tags>
   </entry>
 </search>
