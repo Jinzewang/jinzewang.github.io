@@ -17,6 +17,65 @@
     <title>计算机网络之流量控制和拥塞控制</title>
     <url>/2021/07/02/</url>
     <content><![CDATA[<hr>
+<blockquote>
+<p>莫愁前路无知己，天下谁人不识君。——《别董大二首》唐<strong>·</strong>高适</p>
+</blockquote>
+<span id="more"></span>
+
+<h5 id="滑动窗口发送数据"><a href="#滑动窗口发送数据" class="headerlink" title="滑动窗口发送数据"></a>滑动窗口发送数据</h5><p>滑动窗口是以字节为单位发送数据。</p>
+<p>通过窗口的滑动来高效的发送数据到缓存。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/slidingWindow.png"></p>
+<h5 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h5><h6 id="利用滑动窗口实现流量控制"><a href="#利用滑动窗口实现流量控制" class="headerlink" title="利用滑动窗口实现流量控制"></a>利用滑动窗口实现流量控制</h6><p><strong>流量控制</strong>即为让发送方发送数据不要太快，要让接收方来得及处理。</p>
+<p>当发送方与接收方在建立连接之初就会协商一个发送窗口值s和接收窗口值r（通常s&lt;=r，<font color = "red">单位是字节</font>）。当接收方发现发送来的数据丢失就会缩小接收窗口，当接收窗口的缓存已被数据填满，那么就不会允许再次发来数据，并置接收窗口值为<font color = "red">0</font>。</p>
+<p>此刻，可能会出现<strong>死锁</strong>情况：当接收窗口被置为0后，接收端处理了缓存中的数据，再次发送一个大于0的窗口值给发送端，<font color="red">若是</font>该报文段丢失了，那么会出现相互等待的情况，即发送端等待接收端发送一个不为0的报文段，而接收端等待发送端发送数据，由此形成了死锁。</p>
+<p>为解决该问题TCP使用了<strong>接收持续计时器</strong>，即连接中的一方收到0窗口值后就会启动该计时器，计时器满，就会发送一个试探报文段（它只携带一个字节数据），若另一方收到该报文段就会发送给对方自己现在的窗口值，若窗口值还是0，那么重置计时器，若不是，则继续发送数据，死锁打破。</p>
+<h6 id="TCP的传输效率"><a href="#TCP的传输效率" class="headerlink" title="TCP的传输效率"></a>TCP的传输效率</h6><p>未完待续。。。。。。</p>
+<h5 id="流量控制和拥塞控制的区别"><a href="#流量控制和拥塞控制的区别" class="headerlink" title="流量控制和拥塞控制的区别"></a>流量控制和拥塞控制的区别</h5><p>拥塞控制是控制整个输入网络中的数据，使路由器和链路中的负荷不至于过载；流量控制是减少发送端发送数据的速率，是接收端来得及处理。</p>
+<p><strong>范围不同</strong></p>
+<p>流量控制针对的是TCP连接的两端，而拥塞控制针对的是整个互联网络，包括所有的路由器和主机。</p>
+<h5 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h5><h6 id="拥塞控制的一般原理"><a href="#拥塞控制的一般原理" class="headerlink" title="拥塞控制的一般原理"></a>拥塞控制的一般原理</h6><p><strong>什么是网络拥塞？</strong></p>
+<p>某段时间内对网络中的某种资源的需求大于它能提供的资源数量，就会产生网络拥塞，当网络中许多资源同时产生拥塞，网络吞吐量量就会产生明显下降。</p>
+<p>实践证明，拥塞控制是很难设计的，因为它是一个动态的（而不是静态的）问题。当前网络正朝着高速化的方向发展，这很容易出现缓存不够大而造成分组的丢失。但<font color = "blue">分组的丢失是网络发生拥塞的征兆而不是原因</font>。在许多情况下，甚至<font color = "red">正是拥塞控制本身成为引起网络性能恶化甚至发生死锁的原因</font>。这点应特别引起重视。 </p>
+<h6 id="开环控制和闭环控制"><a href="#开环控制和闭环控制" class="headerlink" title="开环控制和闭环控制"></a>开环控制和闭环控制</h6><p><strong>开环控制</strong></p>
+<p>在设计网络时事先将有关发生拥塞的因素考虑周到，力求网络在工作时不产生拥塞。 </p>
+<p><strong>闭环控制</strong></p>
+<p>基于反馈环路的概念。属于闭环控制的有以下几种措施：<br>        (1) 监测网络系统以便检测到拥塞在何时、何处发生。<br>        (2) 将拥塞发生的信息传送到可采取行动的地方。<br>        (3) 调整网络系统的运行以解决出现的问题。</p>
+<h6 id="检测网络拥塞的指标"><a href="#检测网络拥塞的指标" class="headerlink" title="检测网络拥塞的指标"></a>检测网络拥塞的指标</h6><p>由于缺少缓存空间而被丢弃的分组的百分数；</p>
+<p>平均队列长度；</p>
+<p>超时重传的分组数；</p>
+<p>平均分组时延；</p>
+<p>分组时延的标准差，等等</p>
+<h6 id="拥塞控制的判断"><a href="#拥塞控制的判断" class="headerlink" title="拥塞控制的判断"></a>拥塞控制的判断</h6><p>1 重传计时器超时</p>
+<p>2 收到三个重复的确认</p>
+<h6 id="拥塞控制算法"><a href="#拥塞控制算法" class="headerlink" title="拥塞控制算法"></a>拥塞控制算法</h6><p><strong>控制方法</strong></p>
+<p>TCP采用基于窗口的拥塞控制，该方法属于闭环控制。TCP发送端将会维持一个拥塞窗口（cwnd），该窗口大小取决于网络拥塞程度。实际值=Min(公告窗口值，拥塞窗口值)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/CongestionControlExample.png"></p>
+<center><font size=2>图1 拥塞控制举例</font></center>
+
+<p><strong>慢开始算法</strong></p>
+<p>思路：将会由小到大增加拥塞窗口的数值。呈指数级增长，所以增加很快。</p>
+<p>cwnd：通常会把初始拥塞窗口值设为不超过2到4个最大报文段（SMSS）值。</p>
+<p>ssthresh：慢开始门限，是为了防止拥塞窗口过大引起网络拥堵</p>
+<p>拥塞窗口控制：在每收到一个对新的报文段的确认后（不算重传，即每经过一个传输伦次后就加倍），可以把拥塞窗口增加最多一个 SMSS 的数值。（通常增加原来的2倍数）</p>
+<p>传输伦次：一个传输伦次就是往返时间RTT，“一轮”是指把拥塞窗口所允许的报文数都连续发传去。</p>
+<p>拥塞窗口cwnd每次的增加量 = min (N, SMSS)</p>
+<p>其中 N 是原先未被确认的、但现在被刚收到的确认报文段所确认的字节数。不难看出，当 N &lt; SMSS 时，拥塞窗口每次的增加量要小于 SMSS。用这样的方法逐步增大发送方的拥塞窗口 cwnd，可以使分组注入到网络的速率更加合理。</p>
+<p><strong>拥塞避免算法</strong></p>
+<p>当拥塞窗口cwnd&gt;=ssthresh门限值时，就会开始执行拥塞避免算法</p>
+<p>思路：让拥塞窗口<font color="blue">缓慢增大</font>，这个时候不是加倍，而是只<font color="red">加一</font>.</p>
+<p>此时也处于“加法增大”阶段</p>
+<p><strong>无论在慢开始还是拥塞避免阶段，当出现<font color="red">超时重传</font>时，就会执行慢开始算法</strong></p>
+<p>ssthresh = max(cwnd/2，2)<br>        cwnd = 1<br>        执行慢开始算法<br>        这样做的目的就是要迅速减少主机发送到网络中的分组数，使得发生拥塞的路由器有足够时间把队列中积压的分组处理完毕。</p>
+<p><strong>当<font color = "red">连续收到三个重复确认</font>时就会执行快重传/快恢复算法</strong></p>
+<p><strong>快重传算法</strong></p>
+<p>采用快重传FR (Fast Retransmission) 算法可以让发送方尽早知道发生了个别报文段的丢失。<br>快重传 算法首先要求接收方不要等待自己（接收方）发送数据时才进行捎带确认，而是要立即发送确认，即使收到了失序的报文段也要立即发出对已收到的报文段的重复确认。</p>
+<p>发送方只要一连收到三个重复确认，就知道接收方确实没有收到报文段，因而应当立即进行重传（即“快重传”），这样就不会出现超时，发送方也不就会误认为出现了网络拥塞。</p>
+<p><strong>快恢复算法</strong></p>
+<p>当发送端收到连续三个重复的确认时，由于发送方现在认为网络很可能没有发生拥塞，因此现在不执行慢开始算法，而是执行快恢复算法 FR (Fast Recovery) 算法：<br>    (1) 慢开始门限 ssthresh = 当前拥塞窗口 cwnd / 2 ；<br>    (2) 新拥塞窗口 cwnd = 慢开始门限 ssthresh ；<br>    (3) 开始执行拥塞避免算法，使拥塞窗口缓慢地线性增大。 </p>
+<h6 id="拥塞控制流程图"><a href="#拥塞控制流程图" class="headerlink" title="拥塞控制流程图"></a>拥塞控制流程图</h6><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/TCPCongestionControlProcess.png"></p>
+<center><font size=2>图2 拥塞控制流程图</font></center>
+
+<p>这一节学得不是很好，待后来慢慢体会和感悟，加油！</p>
 ]]></content>
       <categories>
         <category>计算机网络</category>
@@ -26,6 +85,20 @@
         <tag>计算机网络</tag>
         <tag>流量控制</tag>
         <tag>拥塞控制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java字节码</tag>
       </tags>
   </entry>
   <entry>
@@ -73,20 +146,6 @@
       <tags>
         <tag>Java</tag>
         <tag>hashmap</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java字节码</tag>
       </tags>
   </entry>
   <entry>
@@ -151,6 +210,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Java反射机制</title>
+    <url>/2021/06/05/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java反射机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java反射</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java关于锁的学习</title>
+    <url>/2021/06/29/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java中的锁</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Lock</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java基础查漏补缺</title>
     <url>/2021/06/26/</url>
     <content><![CDATA[<hr>
@@ -203,36 +295,50 @@
       </tags>
   </entry>
   <entry>
-    <title>Java关于锁的学习</title>
-    <url>/2021/06/29/</url>
+    <title>经典进程同步问题</title>
+    <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
-<blockquote>
-</blockquote>
+<h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
+<span id="more"></span>
+
+<h6 id="1、使用记录型信号量解决"><a href="#1、使用记录型信号量解决" class="headerlink" title="1、使用记录型信号量解决"></a>1、使用记录型信号量解决</h6><p>记录性信号量主要是在整型信号量的基础上增加了用于记录等待进程的链表。由问题描述知我们需要解决同步和互斥两个问题。因此设置n为临界资源数量，构建数组存储资源，只有n&gt;0才能存入生产的产品，消费者也才能获取产品。使用mutex作为互斥信号量。</p>
+<p>代码描述如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int in &#x3D; 0, out &#x3D; 0;</span><br><span class="line">item[n] buffer;</span><br><span class="line">semaphore mutex &#x3D; 1, empty &#x3D; n, full &#x3D; 0;</span><br><span class="line">void producer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        producer anitem nextp;</span><br><span class="line">        ...</span><br><span class="line">        wait(empty);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        buffer[in] &#x3D; nextp;</span><br><span class="line">        in :&#x3D; (in+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">    &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        wait(full);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        nextc &#x3D; buffer[out];</span><br><span class="line">        out &#x3D; (out+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">    	consumer the item in nextc;</span><br><span class="line">    &#125;Wwhile(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释：mutex作为互斥信号量，empty作为临界资源数量，full表示可用产品数量。producer函数中使用signal(full)表示对消费者可用数量的增加，以便消费者的wait(full)可继续运行，以此保证了同步。</p>
+<p>注意的是：wait和signal是成对出现的，而mutex初始值为1，以保证互斥访问。并且，同步层是在互斥层“外”的，顺序不能变。</p>
+<p><strong>为什么同步层是外层，而互斥层是内层？</strong></p>
+<p>现假设互斥层为外层，同步层为内层。当生产者生产产品进入缓冲区，即调用wait(mutex)，此时锁定了临界资源以实现互斥，继续调用wait(empty)，若<strong>empty=0，</strong>那么将引起阻塞，临界资源将不可更改。此时的状态是：producer等着consumer将产品消费(signal(empty))，而consumer等着producer将占着的临界资源释放(即signal(mutex))，于是开始循环等待，形成了死锁。因此必须<strong>保证同步在外层，互斥在内层。</strong></p>
+<h6 id="2、使用AND信号量解决"><a href="#2、使用AND信号量解决" class="headerlink" title="2、使用AND信号量解决"></a>2、使用AND信号量解决</h6><p>主要使用AND信号量的特性一次性解决生产者-消费者问题的同步性和互斥行。AND信号量特性是一次性把所有临界资源分配给一个进程（要么拥有全部，要么一个也不能拥有）。即为用Swait(empty, mutex)替代wait(empty)和wait(mutex)，用Ssignal(mutex, full)替代signal(mutex)和signal(full)。consumer中也是如此。</p>
 ]]></content>
       <categories>
-        <category>Java基础</category>
-        <category>Java中的锁</category>
+        <category>操作系统</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>Lock</tag>
+        <tag>进程同步</tag>
       </tags>
   </entry>
   <entry>
-    <title>Java反射机制</title>
-    <url>/2021/06/05/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
-</blockquote>
-]]></content>
+    <title>祝福</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>Java基础</category>
-        <category>Java反射机制</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>Java反射</tag>
+        <tag>生活</tag>
+        <tag>感想</tag>
       </tags>
   </entry>
   <entry>
@@ -283,53 +389,6 @@
       <tags>
         <tag>计算机网络</tag>
         <tag>TCP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>经典进程同步问题</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<hr>
-<h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
-<span id="more"></span>
-
-<h6 id="1、使用记录型信号量解决"><a href="#1、使用记录型信号量解决" class="headerlink" title="1、使用记录型信号量解决"></a>1、使用记录型信号量解决</h6><p>记录性信号量主要是在整型信号量的基础上增加了用于记录等待进程的链表。由问题描述知我们需要解决同步和互斥两个问题。因此设置n为临界资源数量，构建数组存储资源，只有n&gt;0才能存入生产的产品，消费者也才能获取产品。使用mutex作为互斥信号量。</p>
-<p>代码描述如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int in &#x3D; 0, out &#x3D; 0;</span><br><span class="line">item[n] buffer;</span><br><span class="line">semaphore mutex &#x3D; 1, empty &#x3D; n, full &#x3D; 0;</span><br><span class="line">void producer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        producer anitem nextp;</span><br><span class="line">        ...</span><br><span class="line">        wait(empty);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        buffer[in] &#x3D; nextp;</span><br><span class="line">        in :&#x3D; (in+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">    &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        wait(full);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        nextc &#x3D; buffer[out];</span><br><span class="line">        out &#x3D; (out+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">    	consumer the item in nextc;</span><br><span class="line">    &#125;Wwhile(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>解释：mutex作为互斥信号量，empty作为临界资源数量，full表示可用产品数量。producer函数中使用signal(full)表示对消费者可用数量的增加，以便消费者的wait(full)可继续运行，以此保证了同步。</p>
-<p>注意的是：wait和signal是成对出现的，而mutex初始值为1，以保证互斥访问。并且，同步层是在互斥层“外”的，顺序不能变。</p>
-<p><strong>为什么同步层是外层，而互斥层是内层？</strong></p>
-<p>现假设互斥层为外层，同步层为内层。当生产者生产产品进入缓冲区，即调用wait(mutex)，此时锁定了临界资源以实现互斥，继续调用wait(empty)，若<strong>empty=0，</strong>那么将引起阻塞，临界资源将不可更改。此时的状态是：producer等着consumer将产品消费(signal(empty))，而consumer等着producer将占着的临界资源释放(即signal(mutex))，于是开始循环等待，形成了死锁。因此必须<strong>保证同步在外层，互斥在内层。</strong></p>
-<h6 id="2、使用AND信号量解决"><a href="#2、使用AND信号量解决" class="headerlink" title="2、使用AND信号量解决"></a>2、使用AND信号量解决</h6><p>主要使用AND信号量的特性一次性解决生产者-消费者问题的同步性和互斥行。AND信号量特性是一次性把所有临界资源分配给一个进程（要么拥有全部，要么一个也不能拥有）。即为用Swait(empty, mutex)替代wait(empty)和wait(mutex)，用Ssignal(mutex, full)替代signal(mutex)和signal(full)。consumer中也是如此。</p>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>进程同步</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>祝福</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>感想</tag>
       </tags>
   </entry>
 </search>
