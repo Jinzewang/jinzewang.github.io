@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-07-03T09:35:37.828Z</updated>
+  <updated>2021-09-12T12:27:29.969Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>计算机网络之网络层</title>
+    <link href="https://jinzewang.github.io/2021/09/12/"/>
+    <id>https://jinzewang.github.io/2021/09/12/</id>
+    <published>2021-09-12T12:27:29.968Z</published>
+    <updated>2021-09-12T12:27:29.969Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="https://jinzewang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="计算机网络" scheme="https://jinzewang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="IP" scheme="https://jinzewang.github.io/tags/IP/"/>
+    
+  </entry>
   
   <entry>
     <title>计算机网络之流量控制和拥塞控制</title>
@@ -136,7 +164,7 @@
     <link href="https://jinzewang.github.io/2021/06/26/"/>
     <id>https://jinzewang.github.io/2021/06/26/</id>
     <published>2021-06-26T01:45:36.224Z</published>
-    <updated>2021-07-01T11:16:11.458Z</updated>
+    <updated>2021-09-03T09:16:11.307Z</updated>
     
     
     <summary type="html">&lt;hr&gt;
@@ -227,7 +255,7 @@
     <link href="https://jinzewang.github.io/2021/06/04/"/>
     <id>https://jinzewang.github.io/2021/06/04/</id>
     <published>2021-06-04T15:05:32.100Z</published>
-    <updated>2021-07-02T04:12:34.032Z</updated>
+    <updated>2021-07-17T06:44:38.915Z</updated>
     
     
     <summary type="html">&lt;hr&gt;
