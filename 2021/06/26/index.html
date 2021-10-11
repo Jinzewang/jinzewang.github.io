@@ -137,7 +137,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/javaFocus_Serializable_transient.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/MultiTreadProcess.png">
 <meta property="article:published_time" content="2021-06-26T01:45:36.224Z">
-<meta property="article:modified_time" content="2021-09-03T09:16:11.307Z">
+<meta property="article:modified_time" content="2021-09-27T02:58:11.454Z">
 <meta property="article:author" content="King">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="重点">
@@ -514,6 +514,8 @@
 <h5 id="数据库编程"><a href="#数据库编程" class="headerlink" title="数据库编程"></a>数据库编程</h5><h6 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h6><p>1 一般过程：加载驱动——&gt;通过DriverManager创建链接对象——&gt;通过该对象创建Statement接口引用——&gt;通过该引用执行相应的sql语句——&gt;（得到结果集ResultSet）——&gt;释放资源</p>
 <p>2 MySQL的URL写法：jdbc:mysql://主机名或IP:端口//数据库</p>
 <h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><h6 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h6><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/MultiTreadProcess.png"></p>
+<p><font color='red'>修改</font>：<font color='orange'>t2.join方法被调用后应该进入等待队列，因为据join源码可知，join底层调用的是wait方法</font>.</p>
+<p><font color='red'>添加</font>：<font color='orange'>sleep、join、wait都会释放cpu资源，但是sleep和join不会释放锁，而wait会释放锁进入等待队列</font>。</p>
 <p>1 多线程实现的两种方式，继承Thread和实现Runable接口，Thread实际上也实现了Runable接口。</p>
 <p>2 匿名线程中run()方法只能调用一次</p>
 <p>3 ReentrantLock可重入锁，遵循了有限等待原则</p>
@@ -666,7 +668,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -677,7 +679,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -688,7 +690,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

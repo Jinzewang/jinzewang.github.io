@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ArrayList和LinkedList的区别</title>
+    <url>/2021/06/26/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java扩展</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>区别</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算机网络之流量控制和拥塞控制</title>
     <url>/2021/07/02/</url>
     <content><![CDATA[<hr>
@@ -75,50 +88,6 @@
       </tags>
   </entry>
   <entry>
-    <title>java引用理解</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<hr>
-<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
-<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
-<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
-<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
-]]></content>
-      <categories>
-        <category>JVM</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>JVM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java字节码</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ArrayList和LinkedList的区别</title>
-    <url>/2021/06/26/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java扩展</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>区别</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一起学习HashMap</title>
     <url>/2021/05/16/</url>
     <content><![CDATA[<hr>
@@ -139,7 +108,7 @@
 
 <p>可以看到，hash方法是计算我们传入put方法key的哈希码，若key为null则哈希值为0，否则获取key的哈希码并将它与它无符号右移16位后的值做异或运算（无符号右移：高位用<font color='red'>0</font>补，右移；异或运算：相异为1，相同为0）。即首先需要计算key的哈希值。</p>
 <p>putVal的源码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">* <span class="meta">@param</span> onlyIfAbsent <span class="keyword">if</span> <span class="keyword">true</span>, don<span class="string">&#x27;t change existing value</span></span><br><span class="line"><span class="string">* @param evict if false, the table is in creation mode.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span></span><br><span class="line"><span class="string">               boolean evict) &#123;</span></span><br><span class="line"><span class="string">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span></span><br><span class="line"><span class="string">    // 首先判断tab是否初始化，若没有则先调用resize()进行初始化</span></span><br><span class="line"><span class="string">    if ((tab = table) == null || (n = tab.length) == 0)</span></span><br><span class="line"><span class="string">        n = (tab = resize()).length;</span></span><br><span class="line"><span class="string">    /*若已经初始化，首先将key的哈希码与(n-1)做与运算，得到i值指向已有散列表中的某个对象，</span></span><br><span class="line"><span class="string">    判断该指向是否为空，若为空直接将key对应的value存在这里*/</span></span><br><span class="line"><span class="string">    /*此处i = (n-1) &amp; hash，是基于数据结构之散列函数设计方法除留余数法的改进，</span></span><br><span class="line"><span class="string">      除留余数法是指关键码key mod p 得到散列地址，p是适当正整数，这里是n-1，即散列表长度减一，</span></span><br><span class="line"><span class="string">     （为什么要减一后面再聊），通过这样设计散列函数得到的散列地址更加随机，更加不会引起冲突*/</span></span><br><span class="line"><span class="string">    if ((p = tab[i = (n - 1) &amp; hash]) == null)</span></span><br><span class="line"><span class="string">        tab[i] = newNode(hash, key, value, null);</span></span><br><span class="line"><span class="string">    else &#123;</span></span><br><span class="line"><span class="string">        Node&lt;K,V&gt; e; K k;</span></span><br><span class="line"><span class="string">        // 判断我要存入的键值对与该散列地址已有的键值对是否相同(先后比较了两个对象key的哈希值和key的地址)，若相同，直接将该键值对赋给我们要插入的键值对</span></span><br><span class="line"><span class="string">        if (p.hash == hash &amp;&amp;</span></span><br><span class="line"><span class="string">            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span></span><br><span class="line"><span class="string">            e = p;</span></span><br><span class="line"><span class="string">        else if (p instanceof TreeNode)  // 判断已存在Hash中p是否为TreeNode类型，若是调用putTreeVal插入数据</span></span><br><span class="line"><span class="string">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span></span><br><span class="line"><span class="string">        else &#123;</span></span><br><span class="line"><span class="string">            // 此时仅剩要插入的与原有的不一样需要插入数据，于是开始查找该位置 链 上的空位置 </span></span><br><span class="line"><span class="string">            for (int binCount = 0; ; ++binCount) &#123;</span></span><br><span class="line"><span class="string">                if ((e = p.next) == null) &#123;</span></span><br><span class="line"><span class="string">                    // 若找到空位置，将我们要插入的键值对存储在这里</span></span><br><span class="line"><span class="string">                    p.next = newNode(hash, key, value, null);</span></span><br><span class="line"><span class="string">                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span></span><br><span class="line"><span class="string">                        treeifyBin(tab, hash);// 若链表到了规定阈值，使用红黑树存储</span></span><br><span class="line"><span class="string">                    break;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                // 重复上述判断是否要存入的和已有的相同，若是算已经存储，退出</span></span><br><span class="line"><span class="string">                if (e.hash == hash &amp;&amp;</span></span><br><span class="line"><span class="string">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span></span><br><span class="line"><span class="string">                    break;</span></span><br><span class="line"><span class="string">                p = e;// 继续查找空位置</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        // 通过以上不断查找后存储，若e != null，说明我们要插入的数据已经存好了，最后更新相应的value</span></span><br><span class="line"><span class="string">        if (e != null) &#123; // existing mapping for key</span></span><br><span class="line"><span class="string">            V oldValue = e.value;</span></span><br><span class="line"><span class="string">            if (!onlyIfAbsent || oldValue == null)</span></span><br><span class="line"><span class="string">                e.value = value;</span></span><br><span class="line"><span class="string">            afterNodeAccess(e);</span></span><br><span class="line"><span class="string">            return oldValue;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    ++modCount; // 记录HashMap内部结构修改次数</span></span><br><span class="line"><span class="string">    // 判断插入后的大小是否超过阈值，若超过需要扩容处理</span></span><br><span class="line"><span class="string">    if (++size &gt; threshold)</span></span><br><span class="line"><span class="string">        resize();</span></span><br><span class="line"><span class="string">    afterNodeInsertion(evict);</span></span><br><span class="line"><span class="string">    return null;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="comment">// 首先判断tab是否初始化，若没有则先调用resize()进行初始化</span></span><br><span class="line">    <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">        n = (tab = resize()).length;</span><br><span class="line">    <span class="comment">/*若已经初始化，首先将key的哈希码与(n-1)做与运算，得到i值指向已有散列表中的某个对象，</span></span><br><span class="line"><span class="comment">    判断该指向是否为空，若为空直接将key对应的value存在这里*/</span></span><br><span class="line">    <span class="comment">/*此处i = (n-1) &amp; hash，是基于数据结构之散列函数设计方法除留余数法的改进，</span></span><br><span class="line"><span class="comment">      除留余数法是指关键码key mod p 得到散列地址，p是适当正整数，这里是n-1，即散列表长度减一，</span></span><br><span class="line"><span class="comment">     （为什么要减一后面再聊），通过这样设计散列函数得到的散列地址更加随机，更加不会引起冲突*/</span></span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">        tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        <span class="comment">// 判断我要存入的键值对与该散列地址已有的键值对是否相同(先后比较了两个对象key的哈希值和key的地址)，若相同，直接将该键值对赋给我们要插入的键值对</span></span><br><span class="line">        <span class="keyword">if</span> (p.hash == hash &amp;&amp;</span><br><span class="line">            ((k = p.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            e = p;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (p <span class="keyword">instanceof</span> TreeNode)  <span class="comment">// 判断已存在Hash中p是否为TreeNode类型，若是调用putTreeVal插入数据</span></span><br><span class="line">            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(<span class="keyword">this</span>, tab, hash, key, value);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 此时仅剩要插入的与原有的不一样需要插入数据，于是开始查找该位置 链 上的空位置 </span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> binCount = <span class="number">0</span>; ; ++binCount) &#123;</span><br><span class="line">                <span class="keyword">if</span> ((e = p.next) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// 若找到空位置，将我们要插入的键值对存储在这里</span></span><br><span class="line">                    p.next = newNode(hash, key, value, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="keyword">if</span> (binCount &gt;= TREEIFY_THRESHOLD - <span class="number">1</span>) <span class="comment">// -1 for 1st</span></span><br><span class="line">                        treeifyBin(tab, hash);<span class="comment">// 若链表到了规定阈值，使用红黑树存储</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 重复上述判断是否要存入的和已有的相同，若是算已经存储，退出</span></span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                p = e;<span class="comment">// 继续查找空位置</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 通过以上不断查找后存储，若e != null，说明我们要插入的数据已经存好了，最后更新相应的value</span></span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123; <span class="comment">// existing mapping for key</span></span><br><span class="line">            V oldValue = e.value;</span><br><span class="line">            <span class="keyword">if</span> (!onlyIfAbsent || oldValue == <span class="keyword">null</span>)</span><br><span class="line">                e.value = value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            <span class="keyword">return</span> oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ++modCount; <span class="comment">// 记录HashMap内部结构修改次数</span></span><br><span class="line">    <span class="comment">// 判断插入后的大小是否超过阈值，若超过需要扩容处理</span></span><br><span class="line">    <span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">        resize();</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>get</strong></p>
 <p>get源码：</p>
@@ -163,6 +132,20 @@
       <tags>
         <tag>Java</tag>
         <tag>hashmap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java字节码</tag>
       </tags>
   </entry>
   <entry>
@@ -203,6 +186,8 @@
 <h5 id="数据库编程"><a href="#数据库编程" class="headerlink" title="数据库编程"></a>数据库编程</h5><h6 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h6><p>1 一般过程：加载驱动——&gt;通过DriverManager创建链接对象——&gt;通过该对象创建Statement接口引用——&gt;通过该引用执行相应的sql语句——&gt;（得到结果集ResultSet）——&gt;释放资源</p>
 <p>2 MySQL的URL写法：jdbc:mysql://主机名或IP:端口//数据库</p>
 <h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><h6 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h6><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/MultiTreadProcess.png"></p>
+<p><font color='red'>修改</font>：<font color='orange'>t2.join方法被调用后应该进入等待队列，因为据join源码可知，join底层调用的是wait方法</font>.</p>
+<p><font color='red'>添加</font>：<font color='orange'>sleep、join、wait都会释放cpu资源，但是sleep和join不会释放锁，而wait会释放锁进入等待队列</font>。</p>
 <p>1 多线程实现的两种方式，继承Thread和实现Runable接口，Thread实际上也实现了Runable接口。</p>
 <p>2 匿名线程中run()方法只能调用一次</p>
 <p>3 ReentrantLock可重入锁，遵循了有限等待原则</p>
@@ -218,12 +203,49 @@
       </tags>
   </entry>
   <entry>
+    <title>java引用理解</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<hr>
+<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
+<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
+<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
+<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射机制</title>
+    <url>/2021/06/05/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java反射机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java反射</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java关于锁的学习</title>
     <url>/2021/06/29/</url>
     <content><![CDATA[<hr>
 <blockquote>
 </blockquote>
-]]></content>
+<h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><p>意义：同一个线程访问同步代码块时不需要进行加锁、解锁操作降低性能开销</p>
+<p><strong>匿名偏向锁</strong>——即锁对象的mark world中没有存储线程ID</p>
+<h5 id="偏向锁的加锁过程"><a href="#偏向锁的加锁过程" class="headerlink" title="偏向锁的加锁过程"></a>偏向锁的加锁过程</h5><h6 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h6><h6 id="当同一线程再次进入同步块"><a href="#当同一线程再次进入同步块" class="headerlink" title="当同一线程再次进入同步块"></a>当同一线程再次进入同步块</h6><h6 id="当不同线程进入同步代码块"><a href="#当不同线程进入同步代码块" class="headerlink" title="当不同线程进入同步代码块"></a>当不同线程进入同步代码块</h6><h5 id="偏向锁的解锁过程"><a href="#偏向锁的解锁过程" class="headerlink" title="偏向锁的解锁过程"></a>偏向锁的解锁过程</h5><h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>同步代码块命令执行很快，线程进行自旋操作，等待获取锁，这样就能提高效率</p>
+<h5 id="轻量级锁的加锁过程"><a href="#轻量级锁的加锁过程" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5><h5 id="轻量级锁的加锁过程-1"><a href="#轻量级锁的加锁过程-1" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5>]]></content>
       <categories>
         <category>Java基础</category>
         <category>Java中的锁</category>
@@ -231,6 +253,62 @@
       <tags>
         <tag>Java</tag>
         <tag>Lock</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java虚拟机的内存模型</title>
+    <url>/2021/10/07/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>为了Java程序能更好的管理内存，Java将运行时数据区分为程序计数器、虚拟机栈、本地方法栈、方法区和堆区五个空间。</p>
+<h5 id="程序计数器（线程私有）"><a href="#程序计数器（线程私有）" class="headerlink" title="程序计数器（线程私有）"></a>程序计数器（线程私有）</h5><p>很小的内存空间，高速，在处理器内部，用于存储字节码指令的地址，该地址是程序将要执行的下一条指令地址，指示程序的完成。通过字节码解释器改变计数器的值选择下一条执行的指令。若执行的是本地方法计数器值则为空。</p>
+<h5 id="虚拟机栈（线程私有）"><a href="#虚拟机栈（线程私有）" class="headerlink" title="虚拟机栈（线程私有）"></a>虚拟机栈（线程私有）</h5><h6 id="虚拟机栈的概述和异常"><a href="#虚拟机栈的概述和异常" class="headerlink" title="虚拟机栈的概述和异常"></a>虚拟机栈的概述和异常</h6><p>可以快速访问的内存空间，位于RAM，由多个栈帧形成虚拟机栈，栈帧中存储局部变量表、操作数栈、部分结果和返回地址等。每一次随着方法的调用入栈随着方法的返回出栈。每一个虚拟机栈都有一个栈指针，通过他的上下移动进行分配和回收内存。</p>
+<p>分配栈时就会知道栈的大小，因此在不断栈帧入栈时就可能会发生栈溢出StackOverflowError，又当申请的栈大小超出一定内存大小时就会发生内存泄露OutOfMemoryError。</p>
+<h6 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h6><p><strong>局部变量表</strong></p>
+<p>局部变量表存储有基本类型或引用类型变量的地址。局部变量表被当做一个从0开始的数组，0是false，若是非int基本类型存储前则转化成int类型，而long和double占据了两个字长，局部变量则是通过数组下标访问。</p>
+<p><strong>操作数栈</strong></p>
+<p>操作数栈也是一个数字数组，但与局部变量表不同的是，它是根据push和pop进行入栈和出栈，而非通过下标访问。</p>
+<p><strong>帧数据区</strong></p>
+<p>主要作用：1、解析方法中的常量池 2、处理方会返回，恢复现场 3、处理调用过程中可能出现的异常，存在一个异常表，若有catch将异常处理，否则中断方法调用。</p>
+<h5 id="本地方法栈（线程私有）"><a href="#本地方法栈（线程私有）" class="headerlink" title="本地方法栈（线程私有）"></a>本地方法栈（线程私有）</h5><p>与虚拟机栈类似，用于管理本地方法调用，但它拥有和虚拟机一样的权限，能访问虚拟机也能在本地堆区分配对象。可以看做是虚拟机栈的动态扩展。在Hotspot虚拟机中，是不区分虚拟机栈和本地方法栈的，因此也会抛出StackOverflow和OutOfMemory错误。</p>
+<h5 id="方法区（线程共享）"><a href="#方法区（线程共享）" class="headerlink" title="方法区（线程共享）"></a>方法区（线程共享）</h5><p>方法区也一块独立的内存空间，保存的主要是类的元信息。这些信息主要来源于class文件。在Hotspot中，也被叫做永久区。主要包含：</p>
+<p><strong>类型信息</strong>：类的完整名称、父类的完成名称、类的修饰符、类的直接接口类表</p>
+<p><strong>常量池</strong>：包含类方法域信息等所引用的常量</p>
+<p><strong>域信息</strong>：域名称、域类型、域修饰符</p>
+<p><strong>方法信息</strong>：方法名，修饰符，返回类型、方法参数、操作数栈及 方法栈局部变量区的大小和异常表</p>
+<p>同时，方法区也会被gc回收，主要回收的是常量池和类元数据。对于常量池可能因为常量的不断加入而引发OutOfMemory，所以也需要进行垃圾回收，回收没有被任何地方引用的常量。</p>
+<h5 id="堆区（线程共享）"><a href="#堆区（线程共享）" class="headerlink" title="堆区（线程共享）"></a>堆区（线程共享）</h5><h6 id="堆的位置与优劣势"><a href="#堆的位置与优劣势" class="headerlink" title="堆的位置与优劣势"></a>堆的位置与优劣势</h6><p>堆位于RAM，是一种常用性内存池，存放所有Java对象。堆是在jvm启动时创建。</p>
+<p><strong>优势</strong>：堆是运行时动态分配内存，同时也不需要知道数据的存活时间。具有很大的灵活性。</p>
+<p><strong>劣势</strong>：访问速度慢，创建和回收对象都会消耗资源甚大。因此这也是gc回收时决定系统性能的瓶颈。</p>
+<p>介绍GCIH：GCIH技术实现了堆外存储，即将大内存的Java对象移到堆外，GC不能直接管理GCIH内的对象，这样降低了GC回收频率和提升了GC回收效率。GCIH是基于OpenJDK深度定制的TaobaoJVM的一种创新。</p>
+<h6 id="逃逸分析介绍"><a href="#逃逸分析介绍" class="headerlink" title="逃逸分析介绍"></a>逃逸分析介绍</h6><p><strong>逃逸分析定义</strong></p>
+<p>计算机软件方面，逃逸分析指的是计算机语言编译器语言优化管理中，分析指针动态范围的方法。通俗点讲，如果一个对象的指针被多个方法或线程引用时，那我们可以称这个指针发生了逃逸 。<sup>[1]</sup></p>
+<p><strong>常见逃逸分析发生场景</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">G</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> B b;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">globalVariablePointerEscape</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        b = <span class="keyword">new</span> B();<span class="comment">//给全局变量赋值，发生逃逸</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">methodPointerEscape</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();<span class="comment">//方法返回值，发生逃逸</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">instancePassPointerEscape</span><span class="params">()</span></span>&#123;</span><br><span class="line">        methodPointerEscape().printClassName(<span class="keyword">this</span>); <span class="comment">//实例引用发生逃逸</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printClassName</span><span class="params">(G g)</span> </span>&#123;</span><br><span class="line">        System.out.println(g.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>如何优化逃逸分析</strong></p>
+<p>对栈重新分配，分析未逃逸变量，在栈中分配对象，这样就非逃逸对象的调用执行与回收就会随着栈的进行创建于销毁。同时也大大减少了堆中对象分配得负担。提升了Java运行的性能。</p>
+<p><strong>逃逸优化</strong>：</p>
+<ul>
+<li><p>同步消除。线程同步的代价是相当高的，同步的后果是降低并发性和性能。逃逸分析可以判断出某个对象是否始终只被一个线程访问，如果只被一个线程访问，那么对该对象的同步操作就可以转化成没有同步保护的操作，这样就能大大提高并发性和性能。</p>
+</li>
+<li><p>矢量替代。逃逸分析方法如果发现对象的内存存储结构不需要连续进行的话，就可以将对象的部分甚至全部都保存在 CPU 寄存器内，这样能大大加快访问速度。  </p>
+</li>
+</ul>
+<h6 id="堆的组成"><a href="#堆的组成" class="headerlink" title="堆的组成"></a>堆的组成</h6><p><strong>按代分</strong></p>
+<p>将堆分为年轻代和年老代，年轻代又分为Eden区、from survivor和to survivor区，对象的出生在Eden区，survivor区是对象至少经过一次年轻代的垃圾回收，当此区对象经过指定年龄还未被回收就会进入年老代。而年老代存储大对象和经过多次垃圾回收的对象。</p>
+<p><strong>按区分</strong></p>
+<p>G1GC垃圾回收规则，将堆不再按代分，而是将堆分为一个个独立的区间。每一个区间的代不是固定的，根据区间内的对象进行判定区间属于哪个代。</p>
+<p><sup>[1]</sup>：《深入理解JVM&amp;G1GC》</p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>jvm内存模型</tag>
       </tags>
   </entry>
   <entry>
@@ -279,23 +357,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java反射机制</title>
-    <url>/2021/06/05/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java反射机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java反射</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>经典进程同步问题</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -317,6 +378,108 @@
       </categories>
       <tags>
         <tag>进程同步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL知识点</title>
+    <url>/2021/09/20/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+<h6 id="where和having的区别？"><a href="#where和having的区别？" class="headerlink" title="where和having的区别？"></a>where和having的区别？</h6><p>where是在分组之前进行限定，若不满足where条件则不参与分组，having是在分组之后进行限定</p>
+<p>where后面不能跟聚合函数，而having后面能跟聚合函数</p>
+<h6 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h6><p>分页查询公式——开始索引=（当前页码 - 1）* 每页记录数量    limit （开始索引，页记录数）</p>
+<h6 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h6><p><strong>添加/删除非空约束</strong></p>
+<p>alter table 表名 modify 字段名 约束</p>
+<p><strong>删除唯一约束</strong></p>
+<p>alter table 表名 drop index 字段名</p>
+<p><strong>添加唯一约束</strong></p>
+<p>alter table 表名 modify 字段名 约束</p>
+<p>添加外键 add constraint 约束名称 foreign key （外键字段名）references 外表名（外表字段名）</p>
+<p><strong>级联操作</strong></p>
+<p>在设置外键约束时进行级联设置constraint 约束名称 foreign key （外键字段名）references 外表名（外表字段名）on (delete/update) cascade</p>
+<p>1 级联更新 on update cascade</p>
+<p>2 级联删除 on delete cascade    (谨慎操作，影响性能和危险操作)</p>
+<h6 id="多表之间关系"><a href="#多表之间关系" class="headerlink" title="多表之间关系"></a>多表之间关系</h6><p><strong>一对一</strong></p>
+<p>对于两张表是一对一的关系，只需要对其中一张表设置一个唯一的外键指向另一张表，或者直接将两张表合为一张表</p>
+<p><strong>一对多（多对一）</strong></p>
+<p>需要在“多”的一方添加外键指向“一”，这个外键是另一张表的主键</p>
+<p><strong>多对多</strong></p>
+<p>多对多关系中，需要一个中间表来作为缓冲，这个中间表至少包含另外两张表的主键作为中间表的外键，同时应当<strong>注意</strong>中间表中的两个外键不能有相同的记录，否则没有意义</p>
+<h6 id="三大范式（数据库的设计原则）"><a href="#三大范式（数据库的设计原则）" class="headerlink" title="三大范式（数据库的设计原则）"></a>三大范式（数据库的设计原则）</h6><p>1NF: 每一列都是不可分割的原子列</p>
+<p>2NF: 在第一范式的基础上，消除部分函数依赖</p>
+<p>3NF: 在第二范式的基础上，消除传递函数依赖</p>
+<h6 id="数据库的备份和还原"><a href="#数据库的备份和还原" class="headerlink" title="数据库的备份和还原"></a>数据库的备份和还原</h6><p><strong>命令行方式</strong></p>
+<p>备份：mysqldump -u -p 数据库名称 &gt; 保存路径</p>
+<p>还原：1创建数据库——2 source 路径</p>
+<p><strong>图形化界面</strong></p>
+<p>备份：</p>
+<p>还原：</p>
+<h6 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h6><p>内连接查询：</p>
+<p>显示内连接查询 {</p>
+<p>​    select from inner join  on</p>
+<p>​    select from join  on</p>
+<p>}</p>
+<p>外连接查询：{</p>
+<p>​    左外连接 select from left join on</p>
+<p>​    右外连接</p>
+<p>}</p>
+<p>子查询：</p>
+<h6 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h6><p><strong>基本概念</strong></p>
+<p><strong>命令</strong>：</p>
+<p>开启事务：start transaction</p>
+<p>事务回滚：rollback</p>
+<p>事务提交：commit {</p>
+<p>​    手动提交&lt;——&gt;自动提交（查询提交方式select @@autocommit; 修改提交方式set @@autocommit）</p>
+<p>}</p>
+<p>{查看数据库隔离级别select @@tx_isolation；修改数据库隔离级别set global transaction isolation level 隔离级别字符串}</p>
+<p>事务四大特性：</p>
+<p>原子性</p>
+<p>持久性</p>
+<p>隔离性</p>
+<p>一致性</p>
+<p>事务的隔离级别：</p>
+<p>1 read uncommitted 读未提交（产生问题：脏读、不可重复读（虚读）、幻读）</p>
+<p>2 read committed 读已提交    产生问题：虚读、幻读    （oracle默认级别）</p>
+<p>3 repeatable read 可重复读    产生问题：幻读    （MySQL默认级别）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">提问：为什么上了写锁（写操作），别的事务还可以读操作？</span><br><span class="line"></span><br><span class="line">因为InnoDB有MVCC机制（多版本并发控制），可以使用快照读，而不会被阻塞。</span><br></pre></td></tr></table></figure>
+
+<p>4  serializable 串行化    解决所有问题</p>
+<h5 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h5><h6 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h6><p>在mysql数据库中的user表</p>
+<p>增：CREATE USER ‘用户名‘@’主机名’ IDENTIFIED BY ‘密码’;</p>
+<p>删：DROP USER ‘用户名‘@’主机名’;</p>
+<p>改：</p>
+<p>查：1、切换到mysql数据库 use mysql，2、查询user表 SELECT * FROM USER;  % 表示通配符，通配任意主机</p>
+<p><strong>忘记root用户的密码了应该怎么办？</strong></p>
+<blockquote>
+<p>1、用管理员运行cmd——&gt;net stop mysql 停止mysql服务</p>
+<p>2、用无验证方式启动mysql服务: mysqld –skip-grant-tables</p>
+<p>3、打开新的cmd窗口，直接输入mysql命令，回车。即登录成功</p>
+<p>4、use mysql;</p>
+<p>5、update user set password = password(‘root’) where user = ‘root’</p>
+<p>6、关闭两个窗口</p>
+<p>7、打开任务管理器，手动结束mysqld.exe进程</p>
+<p>8、用管理员cmd启动mysql服务</p>
+<p>9、使用新密码登录</p>
+</blockquote>
+<h6 id="用户授权"><a href="#用户授权" class="headerlink" title="用户授权"></a>用户授权</h6><p><strong>查询权限</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SHOW GRANTS FOR &#39;用户名&#39;@&#39;主机名&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>授予权限</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grant 权限列表 on 数据库名.表名 to &#39;用户名&#39;@&#39;主机名&#39;</span><br></pre></td></tr></table></figure>
+
+<p>授予全部权限（通配）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GRANT ALL ON *.* TO &#39;用户名&#39;@&#39;主机名&#39;</span><br></pre></td></tr></table></figure>
+
+<p><strong>撤销权限</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">revoke 权限列表 on 数据库名.表名 from &#39;用户名&#39;@&#39;主机名&#39;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -390,6 +553,25 @@
       <tags>
         <tag>生活</tag>
         <tag>感想</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指offer学习笔记</title>
+    <url>/2021/09/21/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+<h5 id="第14题-剪绳子"><a href="#第14题-剪绳子" class="headerlink" title="第14题  剪绳子"></a>第14题  剪绳子</h5><p><strong>结论1</strong>：任何一个正整数都可以有无数个2或3组成，且由所有2或3得到的乘积比其他子数的乘积更大，这个最大积应由尽可能多的3相乘，在没有3的情况下再使用2相乘。</p>
+<p><strong>结论2</strong>：公式（x*y）% p =  （(x%p) * (y%p)）% p</p>
+]]></content>
+      <categories>
+        <category>剑指offer</category>
+      </categories>
+      <tags>
+        <tag>剑指offer</tag>
+        <tag>算法</tag>
+        <tag>数论</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
