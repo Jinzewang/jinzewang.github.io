@@ -135,6 +135,23 @@
       </tags>
   </entry>
   <entry>
+    <title>java引用理解</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<hr>
+<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
+<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
+<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
+<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
+]]></content>
+      <categories>
+        <category>JVM</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java字节码执行机制</title>
     <url>/2021/06/25/</url>
     <content><![CDATA[<hr>
@@ -203,20 +220,69 @@
       </tags>
   </entry>
   <entry>
-    <title>java引用理解</title>
-    <url>/2021/04/05/</url>
+    <title>一起看看Java异常</title>
+    <url>/2021/06/04/</url>
     <content><![CDATA[<hr>
-<h6 id="强引用（Strong-Reference"><a href="#强引用（Strong-Reference" class="headerlink" title="强引用（Strong Reference)"></a>强引用（Strong Reference)</h6><p>最常见，仅包内可见。其他三种是public，能在程序中直接使用，因此在垃圾回收时会尝试只回收只有弱引用的对象。</p>
-<h6 id="软引用-Soft-Reference"><a href="#软引用-Soft-Reference" class="headerlink" title="软引用(Soft Reference)"></a>软引用(Soft Reference)</h6><p>在JVM抛出OOM之前，GC需要根据算法检查决定回收软引用，会尽量让其存活更长的时间。</p>
-<h6 id="弱引用-Weak-Reference"><a href="#弱引用-Weak-Reference" class="headerlink" title="弱引用(Weak Reference)"></a>弱引用(Weak Reference)</h6><p>GC会首先回收该类引用对象进行回收，甚至于进行多次GC回收。更加容易、更快被回收。</p>
-<h6 id="虚引用-Phantom-Reference"><a href="#虚引用-Phantom-Reference" class="headerlink" title="虚引用(Phantom Reference)"></a>虚引用(Phantom Reference)</h6><p><em>又称为幽灵引用，主要目的是在一个对象所占的内存被实际回收之前得到通知， 从而可以进行一些相关的清理工作。幽灵引用在使用方式上与之前介绍的三种引用类型有很大的不同。首先幽灵引用在创建时必须提供一个引用队列作为参数，其次幽灵引用对象的 get 方法总是返回 null ， 因此无法通过幽灵引用来获取被引用 的对象。</em></p>
+<blockquote>
+<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
+</blockquote>
+<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
+<span id="more"></span>
+
+<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
+<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
+<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
+
+<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
+<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
+<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
+<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
+<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
+<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
+<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
+<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
+<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
+<p><strong>thows和thow处理</strong></p>
+<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
+<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
+<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
+<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
+<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
+<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
 ]]></content>
       <categories>
-        <category>JVM</category>
+        <category>Java基础</category>
+        <category>Java异常</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>JVM</tag>
+        <tag>Exception</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java关于锁的学习</title>
+    <url>/2021/06/29/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+</blockquote>
+<span id="more"></span>
+
+<h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><p>意义：同一个线程访问同步代码块时不需要进行加锁、解锁操作降低性能开销</p>
+<p><strong>匿名偏向锁</strong>——即锁对象的mark world中没有存储线程ID</p>
+<h5 id="偏向锁的加锁过程"><a href="#偏向锁的加锁过程" class="headerlink" title="偏向锁的加锁过程"></a>偏向锁的加锁过程</h5><h6 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h6><h6 id="当同一线程再次进入同步块"><a href="#当同一线程再次进入同步块" class="headerlink" title="当同一线程再次进入同步块"></a>当同一线程再次进入同步块</h6><h6 id="当不同线程进入同步代码块"><a href="#当不同线程进入同步代码块" class="headerlink" title="当不同线程进入同步代码块"></a>当不同线程进入同步代码块</h6><h5 id="偏向锁的解锁过程"><a href="#偏向锁的解锁过程" class="headerlink" title="偏向锁的解锁过程"></a>偏向锁的解锁过程</h5><h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>同步代码块命令执行很快，线程进行自旋操作，等待获取锁，这样就能提高效率</p>
+<h5 id="轻量级锁的加锁过程"><a href="#轻量级锁的加锁过程" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5><h5 id="轻量级锁的加锁过程-1"><a href="#轻量级锁的加锁过程-1" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5>]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java中的锁</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Lock</tag>
       </tags>
   </entry>
   <entry>
@@ -237,31 +303,14 @@
       </tags>
   </entry>
   <entry>
-    <title>Java关于锁的学习</title>
-    <url>/2021/06/29/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-</blockquote>
-<h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><p>意义：同一个线程访问同步代码块时不需要进行加锁、解锁操作降低性能开销</p>
-<p><strong>匿名偏向锁</strong>——即锁对象的mark world中没有存储线程ID</p>
-<h5 id="偏向锁的加锁过程"><a href="#偏向锁的加锁过程" class="headerlink" title="偏向锁的加锁过程"></a>偏向锁的加锁过程</h5><h6 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h6><h6 id="当同一线程再次进入同步块"><a href="#当同一线程再次进入同步块" class="headerlink" title="当同一线程再次进入同步块"></a>当同一线程再次进入同步块</h6><h6 id="当不同线程进入同步代码块"><a href="#当不同线程进入同步代码块" class="headerlink" title="当不同线程进入同步代码块"></a>当不同线程进入同步代码块</h6><h5 id="偏向锁的解锁过程"><a href="#偏向锁的解锁过程" class="headerlink" title="偏向锁的解锁过程"></a>偏向锁的解锁过程</h5><h4 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h4><p>同步代码块命令执行很快，线程进行自旋操作，等待获取锁，这样就能提高效率</p>
-<h5 id="轻量级锁的加锁过程"><a href="#轻量级锁的加锁过程" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5><h5 id="轻量级锁的加锁过程-1"><a href="#轻量级锁的加锁过程-1" class="headerlink" title="轻量级锁的加锁过程"></a>轻量级锁的加锁过程</h5>]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java中的锁</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Lock</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java虚拟机的内存模型</title>
     <url>/2021/10/07/</url>
     <content><![CDATA[<hr>
 <blockquote>
 </blockquote>
 <h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>为了Java程序能更好的管理内存，Java将运行时数据区分为程序计数器、虚拟机栈、本地方法栈、方法区和堆区五个空间。</p>
+<span id="more"></span>
+
 <h5 id="程序计数器（线程私有）"><a href="#程序计数器（线程私有）" class="headerlink" title="程序计数器（线程私有）"></a>程序计数器（线程私有）</h5><p>很小的内存空间，高速，在处理器内部，用于存储字节码指令的地址，该地址是程序将要执行的下一条指令地址，指示程序的完成。通过字节码解释器改变计数器的值选择下一条执行的指令。若执行的是本地方法计数器值则为空。</p>
 <h5 id="虚拟机栈（线程私有）"><a href="#虚拟机栈（线程私有）" class="headerlink" title="虚拟机栈（线程私有）"></a>虚拟机栈（线程私有）</h5><h6 id="虚拟机栈的概述和异常"><a href="#虚拟机栈的概述和异常" class="headerlink" title="虚拟机栈的概述和异常"></a>虚拟机栈的概述和异常</h6><p>可以快速访问的内存空间，位于RAM，由多个栈帧形成虚拟机栈，栈帧中存储局部变量表、操作数栈、部分结果和返回地址等。每一次随着方法的调用入栈随着方法的返回出栈。每一个虚拟机栈都有一个栈指针，通过他的上下移动进行分配和回收内存。</p>
 <p>分配栈时就会知道栈的大小，因此在不断栈帧入栈时就可能会发生栈溢出StackOverflowError，又当申请的栈大小超出一定内存大小时就会发生内存泄露OutOfMemoryError。</p>
@@ -312,51 +361,6 @@
       </tags>
   </entry>
   <entry>
-    <title>一起看看Java异常</title>
-    <url>/2021/06/04/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
-</blockquote>
-<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
-<span id="more"></span>
-
-<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
-<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
-<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
-
-<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
-<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
-<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
-<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
-<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
-<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
-<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
-<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
-<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
-<p><strong>thows和thow处理</strong></p>
-<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
-<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
-<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
-<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
-<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
-<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java异常</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Exception</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>经典进程同步问题</title>
     <url>/2021/04/05/</url>
     <content><![CDATA[<hr>
@@ -381,13 +385,15 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL知识点</title>
+    <title>MySQL基础知识点</title>
     <url>/2021/09/20/</url>
     <content><![CDATA[<hr>
 <blockquote>
 </blockquote>
 <h6 id="where和having的区别？"><a href="#where和having的区别？" class="headerlink" title="where和having的区别？"></a>where和having的区别？</h6><p>where是在分组之前进行限定，若不满足where条件则不参与分组，having是在分组之后进行限定</p>
 <p>where后面不能跟聚合函数，而having后面能跟聚合函数</p>
+<span id="more"></span>
+
 <h6 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h6><p>分页查询公式——开始索引=（当前页码 - 1）* 每页记录数量    limit （开始索引，页记录数）</p>
 <h6 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h6><p><strong>添加/删除非空约束</strong></p>
 <p>alter table 表名 modify 字段名 约束</p>
@@ -483,6 +489,29 @@
       </tags>
   </entry>
   <entry>
+    <title>祝福</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+        <tag>感想</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算机网络之TCP的三次握手、四次挥手</title>
     <url>/2021/07/01/</url>
     <content><![CDATA[<hr>
@@ -530,29 +559,6 @@
       <tags>
         <tag>计算机网络</tag>
         <tag>TCP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>祝福</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-      <tags>
-        <tag>生活</tag>
-        <tag>感想</tag>
       </tags>
   </entry>
   <entry>
