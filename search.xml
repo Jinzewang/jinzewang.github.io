@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ArrayList和LinkedList的区别</title>
+    <url>/2021/06/26/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java扩展</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>区别</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>计算机网络之流量控制和拥塞控制</title>
     <url>/2021/07/02/</url>
     <content><![CDATA[<hr>
@@ -75,33 +88,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ArrayList和LinkedList的区别</title>
-    <url>/2021/06/26/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java扩展</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>区别</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java字节码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一起学习HashMap</title>
     <url>/2021/05/16/</url>
     <content><![CDATA[<hr>
@@ -166,6 +152,51 @@
       </tags>
   </entry>
   <entry>
+    <title>一起看看Java异常</title>
+    <url>/2021/06/04/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
+</blockquote>
+<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
+<span id="more"></span>
+
+<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
+<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
+<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
+
+<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
+<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
+<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
+<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
+<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
+<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
+<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
+<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
+<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
+<p><strong>thows和thow处理</strong></p>
+<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
+<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
+<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
+<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
+<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
+<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java异常</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Exception</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java基础查漏补缺</title>
     <url>/2021/06/26/</url>
     <content><![CDATA[<hr>
@@ -220,23 +251,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java反射机制</title>
-    <url>/2021/06/05/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java反射机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java反射</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java关于锁的学习</title>
     <url>/2021/06/29/</url>
     <content><![CDATA[<hr>
@@ -258,26 +272,34 @@
       </tags>
   </entry>
   <entry>
-    <title>祝福</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
+    <content><![CDATA[<hr>
+]]></content>
       <categories>
-        <category>随笔</category>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
       </categories>
       <tags>
-        <tag>生活</tag>
-        <tag>感想</tag>
+        <tag>Java</tag>
+        <tag>Java字节码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射机制</title>
+    <url>/2021/06/05/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java反射机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java反射</tag>
       </tags>
   </entry>
   <entry>
@@ -475,51 +497,6 @@
       </tags>
   </entry>
   <entry>
-    <title>一起看看Java异常</title>
-    <url>/2021/06/04/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
-</blockquote>
-<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
-<span id="more"></span>
-
-<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
-<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
-<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
-
-<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
-<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
-<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
-<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
-<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
-<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
-<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
-<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
-<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
-<p><strong>thows和thow处理</strong></p>
-<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
-<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
-<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
-<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
-<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
-<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java异常</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Exception</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机网络之TCP的三次握手、四次挥手</title>
     <url>/2021/07/01/</url>
     <content><![CDATA[<hr>
@@ -570,34 +547,26 @@
       </tags>
   </entry>
   <entry>
-    <title>有意思的小记</title>
-    <url>/2021/11/17/</url>
-    <content><![CDATA[<hr>
-<h4 id="关于char数组的初始化"><a href="#关于char数组的初始化" class="headerlink" title="关于char数组的初始化"></a>关于char数组的初始化</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
-
-<p>该种初始化是得到每个元素的<font color = 'red'>值</font>初始化为<font color = 'orange'>0</font>，字符：’\u0000’ 0</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>该种初始化则是得到每个元素是 空格，<font color='red'>值</font>是<font color='orange'>32</font>。</p>
-]]></content>
+    <title>祝福</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>生活</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>小记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算机网络之网络层</title>
-    <url>/2021/09/12/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
-        <tag>IP</tag>
+        <tag>生活</tag>
+        <tag>感想</tag>
       </tags>
   </entry>
   <entry>
@@ -617,6 +586,37 @@
         <tag>算法</tag>
         <tag>数论</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络之网络层</title>
+    <url>/2021/09/12/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>IP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>有意思的小记</title>
+    <url>/2021/11/17/</url>
+    <content><![CDATA[<hr>
+<h4 id="关于char数组的初始化"><a href="#关于char数组的初始化" class="headerlink" title="关于char数组的初始化"></a>关于char数组的初始化</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>该种初始化是得到每个元素的<font color = 'red'>值</font>初始化为<font color = 'orange'>0</font>，字符：’\u0000’ 0</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>该种初始化则是得到每个元素是 空格，<font color='red'>值</font>是<font color='orange'>32</font>。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>小记</tag>
       </tags>
   </entry>
   <entry>
