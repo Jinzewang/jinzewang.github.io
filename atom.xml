@@ -6,7 +6,7 @@
   <link href="https://jinzewang.github.io/atom.xml" rel="self"/>
   
   <link href="https://jinzewang.github.io/"/>
-  <updated>2021-10-19T02:49:26.699Z</updated>
+  <updated>2021-11-23T07:10:09.108Z</updated>
   <id>https://jinzewang.github.io/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>从常用的Arrays.sort()源码学习快排和归并排序</title>
+    <link href="https://jinzewang.github.io/2021/11/23/"/>
+    <id>https://jinzewang.github.io/2021/11/23/</id>
+    <published>2021-11-23T06:43:38.343Z</published>
+    <updated>2021-11-23T07:10:09.108Z</updated>
+    
+    
+    <summary type="html">&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;两岸猿声啼不住，轻舟已过万重山。——《早发白帝城》&lt;strong&gt;·&lt;/strong&gt;李白&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;在做Java的某些数组排序问题时，我们常常用到sort方法，那么现在就来具体看看sort里面藏了什么乾坤，它到底是如何运行的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Java" scheme="https://jinzewang.github.io/categories/Java/"/>
+    
+    
+    <category term="算法" scheme="https://jinzewang.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="快排" scheme="https://jinzewang.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
+    
+    <category term="归并排序" scheme="https://jinzewang.github.io/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有意思的小记</title>
+    <link href="https://jinzewang.github.io/2021/11/17/"/>
+    <id>https://jinzewang.github.io/2021/11/17/</id>
+    <published>2021-11-17T06:06:30.513Z</published>
+    <updated>2021-11-17T06:13:32.811Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;hr&gt;
+&lt;h4 id=&quot;关于char数组的初始化&quot;&gt;&lt;a href=&quot;#关于char数组的初始化&quot; class=&quot;headerlink&quot; title=&quot;关于char数组的初始化&quot;&gt;&lt;/a&gt;关于char数组的初始化&lt;/h4&gt;&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="https://jinzewang.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="小记" scheme="https://jinzewang.github.io/tags/%E5%B0%8F%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Java虚拟机的内存模型</title>
@@ -77,7 +130,7 @@
     <link href="https://jinzewang.github.io/2021/09/20/"/>
     <id>https://jinzewang.github.io/2021/09/20/</id>
     <published>2021-09-20T02:05:15.186Z</published>
-    <updated>2021-10-19T02:49:49.352Z</updated>
+    <updated>2021-10-25T03:15:20.324Z</updated>
     
     
     <summary type="html">&lt;hr&gt;

@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml" />
+
+
+
+  <meta name="keywords" content="算法,快排,归并排序," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="King's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="两岸猿声啼不住，轻舟已过万重山。——《早发白帝城》·李白  前言在做Java的某些数组排序问题时，我们常常用到sort方法，那么现在就来具体看看sort里面藏了什么乾坤，它到底是如何运行的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从常用的Arrays.sort()源码学习快排和归并排序">
+<meta property="og:url" content="https://jinzewang.github.io/2021/11/23/index.html">
+<meta property="og:site_name" content="King&#39;s Blog">
+<meta property="og:description" content="两岸猿声啼不住，轻舟已过万重山。——《早发白帝城》·李白  前言在做Java的某些数组排序问题时，我们常常用到sort方法，那么现在就来具体看看sort里面藏了什么乾坤，它到底是如何运行的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-23T06:43:38.343Z">
+<meta property="article:modified_time" content="2021-11-23T07:10:09.108Z">
+<meta property="article:author" content="King">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="快排">
+<meta property="article:tag" content="归并排序">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jinzewang.github.io/2021/11/23/"/>
+
+
+
+
+
+  <title>从常用的Arrays.sort()源码学习快排和归并排序 | King's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4213bd0407b33848677e0742c4b810d5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">King's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">纸上得来终觉浅，绝知此事要躬行</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-loveforever">
+          <a href="/loveforever/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            loveforever
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jinzewang.github.io/2021/11/23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="King's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">从常用的Arrays.sort()源码学习快排和归并排序</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/11/23/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/11/23/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/11/23/" class="leancloud_visitors" data-flag-title="从常用的Arrays.sort()源码学习快排和归并排序">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<blockquote>
+<p>两岸猿声啼不住，轻舟已过万重山。——《早发白帝城》<strong>·</strong>李白</p>
+</blockquote>
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>在做Java的某些数组排序问题时，我们常常用到sort方法，那么现在就来具体看看sort里面藏了什么乾坤，它到底是如何运行的。</p>
+<span id="more"></span>
+
+<h5 id="从Arrays-sort-int-a-进入"><a href="#从Arrays-sort-int-a-进入" class="headerlink" title="从Arrays.sort(int[] a)进入"></a>从Arrays.sort(int[] a)进入</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</span><br><span class="line">    DualPivotQuicksort.sort(a, <span class="number">0</span>, a.length - <span class="number">1</span>, <span class="keyword">null</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">/*各参数</span></span><br><span class="line"><span class="comment">    0				——&gt;left,左下标</span></span><br><span class="line"><span class="comment">    a.length - 1	——&gt;right，右下标</span></span><br><span class="line"><span class="comment">    null			——&gt;work[],</span></span><br><span class="line"><span class="comment">    0				——&gt;workBase</span></span><br><span class="line"><span class="comment">    0				——&gt;workLen</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If the length of an array to be sorted is less than this</span></span><br><span class="line"><span class="comment"> * constant, Quicksort is used in preference to merge sort.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	小于286时快排更加优先于归并排序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> QUICKSORT_THRESHOLD = <span class="number">286</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right,</span></span></span><br><span class="line"><span class="function"><span class="params">                 <span class="keyword">int</span>[] work, <span class="keyword">int</span> workBase, <span class="keyword">int</span> workLen)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Use Quicksort on small arrays	</span></span><br><span class="line">    <span class="comment">// 顾名思义，数组大小比较小的时候采用快排，那到底是多小算小呢？</span></span><br><span class="line">    <span class="keyword">if</span> (right - left &lt; QUICKSORT_THRESHOLD) &#123;<span class="comment">// 小于快排边界的时候算小，往上看，边界=286</span></span><br><span class="line">        sort(a, left, right, <span class="keyword">true</span>);<span class="comment">// 此时采用快排&lt;——&gt;快排在下一节</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Index run[i] is the start of i-th run 	索引run[i]是第i次运行的开始</span></span><br><span class="line"><span class="comment">     * (ascending or descending sequence).	升序或降序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span>[] run = <span class="keyword">new</span> <span class="keyword">int</span>[MAX_RUN_COUNT + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>; run[<span class="number">0</span>] = left;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if the array is nearly sorted</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = left; k &lt; right; run[count] = k) &#123;</span><br><span class="line">        <span class="comment">// Equal items in the beginning of the sequence</span></span><br><span class="line">        <span class="keyword">while</span> (k &lt; right &amp;&amp; a[k] == a[k + <span class="number">1</span>])</span><br><span class="line">            k++;</span><br><span class="line">        <span class="keyword">if</span> (k == right) <span class="keyword">break</span>;  <span class="comment">// Sequence finishes with equal items</span></span><br><span class="line">        <span class="keyword">if</span> (a[k] &lt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// ascending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &lt;= a[k]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[k] &gt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// descending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &gt;= a[k]);</span><br><span class="line">            <span class="comment">// Transform into an ascending sequence</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> lo = run[count] - <span class="number">1</span>, hi = k; ++lo &lt; --hi; ) &#123;</span><br><span class="line">                <span class="keyword">int</span> t = a[lo]; a[lo] = a[hi]; a[hi] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Merge a transformed descending sequence followed by an</span></span><br><span class="line">        <span class="comment">// ascending sequence</span></span><br><span class="line">        <span class="keyword">if</span> (run[count] &gt; left &amp;&amp; a[run[count]] &gt;= a[run[count] - <span class="number">1</span>]) &#123;</span><br><span class="line">            count--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The array is not highly structured,</span></span><br><span class="line"><span class="comment">         * use Quicksort instead of merge sort.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (++count == MAX_RUN_COUNT) &#123;</span><br><span class="line">            sort(a, left, right, <span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// These invariants should hold true:</span></span><br><span class="line">    <span class="comment">//    run[0] = 0</span></span><br><span class="line">    <span class="comment">//    run[&lt;last&gt;] = right + 1; (terminator)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A single equal run</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count == <span class="number">1</span> &amp;&amp; run[count] &gt; right) &#123;</span><br><span class="line">        <span class="comment">// Either a single ascending or a transformed descending run.</span></span><br><span class="line">        <span class="comment">// Always check that a final run is a proper terminator, otherwise</span></span><br><span class="line">        <span class="comment">// we have an unterminated trailing run, to handle downstream.</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    right++;</span><br><span class="line">    <span class="keyword">if</span> (run[count] &lt; right) &#123;</span><br><span class="line">        <span class="comment">// Corner case: the final run is not a terminator. This may happen</span></span><br><span class="line">        <span class="comment">// if a final run is an equals run, or there is a single-element run</span></span><br><span class="line">        <span class="comment">// at the end. Fix up by adding a proper terminator at the end.</span></span><br><span class="line">        <span class="comment">// Note that we terminate with (right + 1), incremented earlier.</span></span><br><span class="line">        run[++count] = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Determine alternation base for merge</span></span><br><span class="line">    <span class="keyword">byte</span> odd = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">1</span>; (n &lt;&lt;= <span class="number">1</span>) &lt; count; odd ^= <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use or create temporary array b for merging</span></span><br><span class="line">    <span class="keyword">int</span>[] b;                 <span class="comment">// temp array; alternates with a</span></span><br><span class="line">    <span class="keyword">int</span> ao, bo;              <span class="comment">// array offsets from &#x27;left&#x27;</span></span><br><span class="line">    <span class="keyword">int</span> blen = right - left; <span class="comment">// space needed for b</span></span><br><span class="line">    <span class="keyword">if</span> (work == <span class="keyword">null</span> || workLen &lt; blen || workBase + blen &gt; work.length) &#123;</span><br><span class="line">        work = <span class="keyword">new</span> <span class="keyword">int</span>[blen];</span><br><span class="line">        workBase = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (odd == <span class="number">0</span>) &#123;</span><br><span class="line">        System.arraycopy(a, left, work, workBase, blen);</span><br><span class="line">        b = a;</span><br><span class="line">        bo = <span class="number">0</span>;</span><br><span class="line">        a = work;</span><br><span class="line">        ao = workBase - left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        b = work;</span><br><span class="line">        ao = <span class="number">0</span>;</span><br><span class="line">        bo = workBase - left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Merging</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> last; count &gt; <span class="number">1</span>; count = last) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = (last = <span class="number">0</span>) + <span class="number">2</span>; k &lt;= count; k += <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> hi = run[k], mi = run[k - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = run[k - <span class="number">2</span>], p = i, q = mi; i &lt; hi; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (q &gt;= hi || p &lt; mi &amp;&amp; a[p + ao] &lt;= a[q + ao]) &#123;</span><br><span class="line">                    b[i + bo] = a[p++ + ao];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    b[i + bo] = a[q++ + ao];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            run[++last] = hi;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((count &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = right, lo = run[count - <span class="number">1</span>]; --i &gt;= lo;</span><br><span class="line">                b[i + bo] = a[i + ao]</span><br><span class="line">            );</span><br><span class="line">            run[++last] = right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] t = a; a = b; b = t;</span><br><span class="line">        <span class="keyword">int</span> o = ao; ao = bo; bo = o;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">boolean</span> leftmost)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = right - left + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use insertion sort on tiny arrays</span></span><br><span class="line">    <span class="keyword">if</span> (length &lt; INSERTION_SORT_THRESHOLD) &#123;</span><br><span class="line">        <span class="keyword">if</span> (leftmost) &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Traditional (without sentinel) insertion sort,</span></span><br><span class="line"><span class="comment">             * optimized for server VM, is used in case of</span></span><br><span class="line"><span class="comment">             * the leftmost part.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = left, j = i; i &lt; right; j = ++i) &#123;</span><br><span class="line">                <span class="keyword">int</span> ai = a[i + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">while</span> (ai &lt; a[j]) &#123;</span><br><span class="line">                    a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">                    <span class="keyword">if</span> (j-- == left) &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                a[j + <span class="number">1</span>] = ai;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip the longest ascending sequence.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">while</span> (a[++left] &gt;= a[left - <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Every element from adjoining part plays the role</span></span><br><span class="line"><span class="comment">             * of sentinel, therefore this allows us to avoid the</span></span><br><span class="line"><span class="comment">             * left range check on each iteration. Moreover, we use</span></span><br><span class="line"><span class="comment">             * the more optimized algorithm, so called pair insertion</span></span><br><span class="line"><span class="comment">             * sort, which is faster (in the context of Quicksort)</span></span><br><span class="line"><span class="comment">             * than traditional implementation of insertion sort.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = left; ++left &lt;= right; k = ++left) &#123;</span><br><span class="line">                <span class="keyword">int</span> a1 = a[k], a2 = a[left];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (a1 &lt; a2) &#123;</span><br><span class="line">                    a2 = a1; a1 = a[left];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">while</span> (a1 &lt; a[--k]) &#123;</span><br><span class="line">                    a[k + <span class="number">2</span>] = a[k];</span><br><span class="line">                &#125;</span><br><span class="line">                a[++k + <span class="number">1</span>] = a1;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (a2 &lt; a[--k]) &#123;</span><br><span class="line">                    a[k + <span class="number">1</span>] = a[k];</span><br><span class="line">                &#125;</span><br><span class="line">                a[k + <span class="number">1</span>] = a2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> last = a[right];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (last &lt; a[--right]) &#123;</span><br><span class="line">                a[right + <span class="number">1</span>] = a[right];</span><br><span class="line">            &#125;</span><br><span class="line">            a[right + <span class="number">1</span>] = last;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Inexpensive approximation of length / 7</span></span><br><span class="line">    <span class="keyword">int</span> seventh = (length &gt;&gt; <span class="number">3</span>) + (length &gt;&gt; <span class="number">6</span>) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Sort five evenly spaced elements around (and including) the</span></span><br><span class="line"><span class="comment">     * center element in the range. These elements will be used for</span></span><br><span class="line"><span class="comment">     * pivot selection as described below. The choice for spacing</span></span><br><span class="line"><span class="comment">     * these elements was empirically determined to work well on</span></span><br><span class="line"><span class="comment">     * a wide variety of inputs.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> e3 = (left + right) &gt;&gt;&gt; <span class="number">1</span>; <span class="comment">// The midpoint</span></span><br><span class="line">    <span class="keyword">int</span> e2 = e3 - seventh;</span><br><span class="line">    <span class="keyword">int</span> e1 = e2 - seventh;</span><br><span class="line">    <span class="keyword">int</span> e4 = e3 + seventh;</span><br><span class="line">    <span class="keyword">int</span> e5 = e4 + seventh;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sort these elements using insertion sort</span></span><br><span class="line">    <span class="keyword">if</span> (a[e2] &lt; a[e1]) &#123; <span class="keyword">int</span> t = a[e2]; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a[e3] &lt; a[e2]) &#123; <span class="keyword">int</span> t = a[e3]; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a[e4] &lt; a[e3]) &#123; <span class="keyword">int</span> t = a[e4]; a[e4] = a[e3]; a[e3] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e2]) &#123; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">            <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a[e5] &lt; a[e4]) &#123; <span class="keyword">int</span> t = a[e5]; a[e5] = a[e4]; a[e4] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e3]) &#123; a[e4] = a[e3]; a[e3] = t;</span><br><span class="line">            <span class="keyword">if</span> (t &lt; a[e2]) &#123; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">                <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Pointers</span></span><br><span class="line">    <span class="keyword">int</span> less  = left;  <span class="comment">// The index of the first element of center part</span></span><br><span class="line">    <span class="keyword">int</span> great = right; <span class="comment">// The index before the first element of right part</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a[e1] != a[e2] &amp;&amp; a[e2] != a[e3] &amp;&amp; a[e3] != a[e4] &amp;&amp; a[e4] != a[e5]) &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Use the second and fourth of the five sorted elements as pivots.</span></span><br><span class="line"><span class="comment">         * These values are inexpensive approximations of the first and</span></span><br><span class="line"><span class="comment">         * second terciles of the array. Note that pivot1 &lt;= pivot2.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> pivot1 = a[e2];</span><br><span class="line">        <span class="keyword">int</span> pivot2 = a[e4];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The first and the last elements to be sorted are moved to the</span></span><br><span class="line"><span class="comment">         * locations formerly occupied by the pivots. When partitioning</span></span><br><span class="line"><span class="comment">         * is complete, the pivots are swapped back into their final</span></span><br><span class="line"><span class="comment">         * positions, and excluded from subsequent sorting.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        a[e2] = a[left];</span><br><span class="line">        a[e4] = a[right];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Skip elements, which are less or greater than pivot values.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">while</span> (a[++less] &lt; pivot1);</span><br><span class="line">        <span class="keyword">while</span> (a[--great] &gt; pivot2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Partitioning:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   left part           center part                   right part</span></span><br><span class="line"><span class="comment">         * +--------------------------------------------------------------+</span></span><br><span class="line"><span class="comment">         * |  &lt; pivot1  |  pivot1 &lt;= &amp;&amp; &lt;= pivot2  |    ?    |  &gt; pivot2  |</span></span><br><span class="line"><span class="comment">         * +--------------------------------------------------------------+</span></span><br><span class="line"><span class="comment">         *               ^                          ^       ^</span></span><br><span class="line"><span class="comment">         *               |                          |       |</span></span><br><span class="line"><span class="comment">         *              less                        k     great</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Invariants:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *              all in (left, less)   &lt; pivot1</span></span><br><span class="line"><span class="comment">         *    pivot1 &lt;= all in [less, k)     &lt;= pivot2</span></span><br><span class="line"><span class="comment">         *              all in (great, right) &gt; pivot2</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        outer:</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = less - <span class="number">1</span>; ++k &lt;= great; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> ak = a[k];</span><br><span class="line">            <span class="keyword">if</span> (ak &lt; pivot1) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                a[k] = a[less];</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Here and below we use &quot;a[i] = b; i++;&quot; instead</span></span><br><span class="line"><span class="comment">                 * of &quot;a[i++] = b;&quot; due to performance issue.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                a[less] = ak;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ak &gt; pivot2) &#123; <span class="comment">// Move a[k] to right part</span></span><br><span class="line">                <span class="keyword">while</span> (a[great] &gt; pivot2) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (great-- == k) &#123;</span><br><span class="line">                        <span class="keyword">break</span> outer;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (a[great] &lt; pivot1) &#123; <span class="comment">// a[great] &lt;= pivot2</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = a[great];</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">// pivot1 &lt;= a[great] &lt;= pivot2</span></span><br><span class="line">                    a[k] = a[great];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Here and below we use &quot;a[i] = b; i--;&quot; instead</span></span><br><span class="line"><span class="comment">                 * of &quot;a[i--] = b;&quot; due to performance issue.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                a[great] = ak;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Swap pivots into their final positions</span></span><br><span class="line">        a[left]  = a[less  - <span class="number">1</span>]; a[less  - <span class="number">1</span>] = pivot1;</span><br><span class="line">        a[right] = a[great + <span class="number">1</span>]; a[great + <span class="number">1</span>] = pivot2;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort left and right parts recursively, excluding known pivots</span></span><br><span class="line">        sort(a, left, less - <span class="number">2</span>, leftmost);</span><br><span class="line">        sort(a, great + <span class="number">2</span>, right, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * If center part is too large (comprises &gt; 4/7 of the array),</span></span><br><span class="line"><span class="comment">         * swap internal pivot values to ends.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (less &lt; e1 &amp;&amp; e5 &lt; great) &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip elements, which are equal to pivot values.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">while</span> (a[less] == pivot1) &#123;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (a[great] == pivot2) &#123;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Partitioning:</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             *   left part         center part                  right part</span></span><br><span class="line"><span class="comment">             * +----------------------------------------------------------+</span></span><br><span class="line"><span class="comment">             * | == pivot1 |  pivot1 &lt; &amp;&amp; &lt; pivot2  |    ?    | == pivot2 |</span></span><br><span class="line"><span class="comment">             * +----------------------------------------------------------+</span></span><br><span class="line"><span class="comment">             *              ^                        ^       ^</span></span><br><span class="line"><span class="comment">             *              |                        |       |</span></span><br><span class="line"><span class="comment">             *             less                      k     great</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Invariants:</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             *              all in (*,  less) == pivot1</span></span><br><span class="line"><span class="comment">             *     pivot1 &lt; all in [less,  k)  &lt; pivot2</span></span><br><span class="line"><span class="comment">             *              all in (great, *) == pivot2</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            outer:</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = less - <span class="number">1</span>; ++k &lt;= great; ) &#123;</span><br><span class="line">                <span class="keyword">int</span> ak = a[k];</span><br><span class="line">                <span class="keyword">if</span> (ak == pivot1) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = ak;</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ak == pivot2) &#123; <span class="comment">// Move a[k] to right part</span></span><br><span class="line">                    <span class="keyword">while</span> (a[great] == pivot2) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (great-- == k) &#123;</span><br><span class="line">                            <span class="keyword">break</span> outer;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (a[great] == pivot1) &#123; <span class="comment">// a[great] &lt; pivot2</span></span><br><span class="line">                        a[k] = a[less];</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                         * Even though a[great] equals to pivot1, the</span></span><br><span class="line"><span class="comment">                         * assignment a[less] = pivot1 may be incorrect,</span></span><br><span class="line"><span class="comment">                         * if a[great] and pivot1 are floating-point zeros</span></span><br><span class="line"><span class="comment">                         * of different signs. Therefore in float and</span></span><br><span class="line"><span class="comment">                         * double sorting methods we have to use more</span></span><br><span class="line"><span class="comment">                         * accurate assignment a[less] = a[great].</span></span><br><span class="line"><span class="comment">                         */</span></span><br><span class="line">                        a[less] = pivot1;</span><br><span class="line">                        ++less;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123; <span class="comment">// pivot1 &lt; a[great] &lt; pivot2</span></span><br><span class="line">                        a[k] = a[great];</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[great] = ak;</span><br><span class="line">                    --great;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort center part recursively</span></span><br><span class="line">        sort(a, less, great, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// Partitioning with one pivot</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Use the third of the five sorted elements as pivot.</span></span><br><span class="line"><span class="comment">         * This value is inexpensive approximation of the median.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> pivot = a[e3];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Partitioning degenerates to the traditional 3-way</span></span><br><span class="line"><span class="comment">         * (or &quot;Dutch National Flag&quot;) schema:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   left part    center part              right part</span></span><br><span class="line"><span class="comment">         * +-------------------------------------------------+</span></span><br><span class="line"><span class="comment">         * |  &lt; pivot  |   == pivot   |     ?    |  &gt; pivot  |</span></span><br><span class="line"><span class="comment">         * +-------------------------------------------------+</span></span><br><span class="line"><span class="comment">         *              ^              ^        ^</span></span><br><span class="line"><span class="comment">         *              |              |        |</span></span><br><span class="line"><span class="comment">         *             less            k      great</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Invariants:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   all in (left, less)   &lt; pivot</span></span><br><span class="line"><span class="comment">         *   all in [less, k)     == pivot</span></span><br><span class="line"><span class="comment">         *   all in (great, right) &gt; pivot</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = less; k &lt;= great; ++k) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[k] == pivot) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> ak = a[k];</span><br><span class="line">            <span class="keyword">if</span> (ak &lt; pivot) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                a[k] = a[less];</span><br><span class="line">                a[less] = ak;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// a[k] &gt; pivot - Move a[k] to right part</span></span><br><span class="line">                <span class="keyword">while</span> (a[great] &gt; pivot) &#123;</span><br><span class="line">                    --great;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (a[great] &lt; pivot) &#123; <span class="comment">// a[great] &lt;= pivot</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = a[great];</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">// a[great] == pivot</span></span><br><span class="line">                    <span class="comment">/*</span></span><br><span class="line"><span class="comment">                     * Even though a[great] equals to pivot, the</span></span><br><span class="line"><span class="comment">                     * assignment a[k] = pivot may be incorrect,</span></span><br><span class="line"><span class="comment">                     * if a[great] and pivot are floating-point</span></span><br><span class="line"><span class="comment">                     * zeros of different signs. Therefore in float</span></span><br><span class="line"><span class="comment">                     * and double sorting methods we have to use</span></span><br><span class="line"><span class="comment">                     * more accurate assignment a[k] = a[great].</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    a[k] = pivot;</span><br><span class="line">                &#125;</span><br><span class="line">                a[great] = ak;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Sort left and right parts recursively.</span></span><br><span class="line"><span class="comment">         * All elements from center part are equal</span></span><br><span class="line"><span class="comment">         * and, therefore, already sorted.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        sort(a, left, less - <span class="number">1</span>, leftmost);</span><br><span class="line">        sort(a, great + <span class="number">1</span>, right, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    King
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://jinzewang.github.io/2021/11/23/" title="从常用的Arrays.sort()源码学习快排和归并排序">https://jinzewang.github.io/2021/11/23/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E5%BF%AB%E6%8E%92/" rel="tag"># 快排</a>
+          
+            <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag"># 归并排序</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/11/17/" rel="next" title="有意思的小记">
+                <i class="fa fa-chevron-left"></i> 有意思的小记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Jinzewang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-fab fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:jinzewang2014@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-fa fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.cn/user/2735240661439847" target="_blank" title="juejin">
+                      
+                        <i class="fa fa-fw fa-globe"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-links"></i>
+                大佬们的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://maqinjia.github.io" title="马老师" target="_blank">马老师</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8EArrays-sort-int-a-%E8%BF%9B%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">从Arrays.sort(int[] a)进入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">快速排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2020 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">king</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: '4lV36i9iiJK8seTeS4T2t800-gzGzoHsz',
+        appKey: 'y0d9TLdxyiyAQxkfY0NCYYRd',
+        placeholder: '少侠请说~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("4lV36i9iiJK8seTeS4T2t800-gzGzoHsz", "y0d9TLdxyiyAQxkfY0NCYYRd");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

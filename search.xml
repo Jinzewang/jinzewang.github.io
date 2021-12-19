@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ArrayList和LinkedList的区别</title>
-    <url>/2021/06/26/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java扩展</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>区别</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>计算机网络之流量控制和拥塞控制</title>
     <url>/2021/07/02/</url>
     <content><![CDATA[<hr>
@@ -88,6 +75,33 @@
       </tags>
   </entry>
   <entry>
+    <title>ArrayList和LinkedList的区别</title>
+    <url>/2021/06/26/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java扩展</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>区别</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java字节码执行机制</title>
+    <url>/2021/06/25/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java字节码执行机制</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Java字节码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一起学习HashMap</title>
     <url>/2021/05/16/</url>
     <content><![CDATA[<hr>
@@ -152,20 +166,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java字节码执行机制</title>
-    <url>/2021/06/25/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>Java基础</category>
-        <category>Java字节码执行机制</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Java字节码</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java基础查漏补缺</title>
     <url>/2021/06/26/</url>
     <content><![CDATA[<hr>
@@ -220,48 +220,20 @@
       </tags>
   </entry>
   <entry>
-    <title>一起看看Java异常</title>
-    <url>/2021/06/04/</url>
+    <title>Java反射机制</title>
+    <url>/2021/06/05/</url>
     <content><![CDATA[<hr>
 <blockquote>
-<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
+<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
 </blockquote>
-<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
-<span id="more"></span>
-
-<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
-<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
-<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
-
-<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
-<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
-<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
-<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
-<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
-<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
-<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
-<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
-<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
-<p><strong>thows和thow处理</strong></p>
-<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
-<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
-<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
-<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
-<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
-<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
 ]]></content>
       <categories>
         <category>Java基础</category>
-        <category>Java异常</category>
+        <category>Java反射机制</category>
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>Exception</tag>
+        <tag>Java反射</tag>
       </tags>
   </entry>
   <entry>
@@ -286,20 +258,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Java反射机制</title>
-    <url>/2021/06/05/</url>
-    <content><![CDATA[<hr>
-<blockquote>
-<p>举杯邀明月，对影成三人。——《月下独酌四首》—唐<strong>·</strong>李白</p>
-</blockquote>
-]]></content>
+    <title>祝福</title>
+    <url>/2021/04/05/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>Java基础</category>
-        <category>Java反射机制</category>
+        <category>随笔</category>
       </categories>
       <tags>
-        <tag>Java</tag>
-        <tag>Java反射</tag>
+        <tag>生活</tag>
+        <tag>感想</tag>
       </tags>
   </entry>
   <entry>
@@ -361,30 +339,6 @@
       </tags>
   </entry>
   <entry>
-    <title>经典进程同步问题</title>
-    <url>/2021/04/05/</url>
-    <content><![CDATA[<hr>
-<h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
-<span id="more"></span>
-
-<h6 id="1、使用记录型信号量解决"><a href="#1、使用记录型信号量解决" class="headerlink" title="1、使用记录型信号量解决"></a>1、使用记录型信号量解决</h6><p>记录性信号量主要是在整型信号量的基础上增加了用于记录等待进程的链表。由问题描述知我们需要解决同步和互斥两个问题。因此设置n为临界资源数量，构建数组存储资源，只有n&gt;0才能存入生产的产品，消费者也才能获取产品。使用mutex作为互斥信号量。</p>
-<p>代码描述如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int in &#x3D; 0, out &#x3D; 0;</span><br><span class="line">item[n] buffer;</span><br><span class="line">semaphore mutex &#x3D; 1, empty &#x3D; n, full &#x3D; 0;</span><br><span class="line">void producer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        producer anitem nextp;</span><br><span class="line">        ...</span><br><span class="line">        wait(empty);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        buffer[in] &#x3D; nextp;</span><br><span class="line">        in :&#x3D; (in+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">    &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        wait(full);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        nextc &#x3D; buffer[out];</span><br><span class="line">        out &#x3D; (out+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">    	consumer the item in nextc;</span><br><span class="line">    &#125;Wwhile(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>解释：mutex作为互斥信号量，empty作为临界资源数量，full表示可用产品数量。producer函数中使用signal(full)表示对消费者可用数量的增加，以便消费者的wait(full)可继续运行，以此保证了同步。</p>
-<p>注意的是：wait和signal是成对出现的，而mutex初始值为1，以保证互斥访问。并且，同步层是在互斥层“外”的，顺序不能变。</p>
-<p><strong>为什么同步层是外层，而互斥层是内层？</strong></p>
-<p>现假设互斥层为外层，同步层为内层。当生产者生产产品进入缓冲区，即调用wait(mutex)，此时锁定了临界资源以实现互斥，继续调用wait(empty)，若<strong>empty=0，</strong>那么将引起阻塞，临界资源将不可更改。此时的状态是：producer等着consumer将产品消费(signal(empty))，而consumer等着producer将占着的临界资源释放(即signal(mutex))，于是开始循环等待，形成了死锁。因此必须<strong>保证同步在外层，互斥在内层。</strong></p>
-<h6 id="2、使用AND信号量解决"><a href="#2、使用AND信号量解决" class="headerlink" title="2、使用AND信号量解决"></a>2、使用AND信号量解决</h6><p>主要使用AND信号量的特性一次性解决生产者-消费者问题的同步性和互斥行。AND信号量特性是一次性把所有临界资源分配给一个进程（要么拥有全部，要么一个也不能拥有）。即为用Swait(empty, mutex)替代wait(empty)和wait(mutex)，用Ssignal(mutex, full)替代signal(mutex)和signal(full)。consumer中也是如此。</p>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>进程同步</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MySQL基础知识点</title>
     <url>/2021/09/20/</url>
     <content><![CDATA[<hr>
@@ -421,16 +375,24 @@
 <p><strong>图形化界面</strong></p>
 <p>备份：</p>
 <p>还原：</p>
-<h6 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h6><p>内连接查询：</p>
-<p>显示内连接查询 {</p>
-<p>​    select from inner join  on</p>
-<p>​    select from join  on</p>
+<h6 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h6><p>内连接查询：{</p>
+<p>​    隐式内连接：{</p>
+<p>​        select * from table1 t1, table2 t2 where … ;    </p>
+<p>​    }</p>
+<p>​    显示内连接查询 {</p>
+<p>​        select * from table1 inner join  on table2</p>
+<p>​        select * from table1 join  on table2</p>
+<p>​    }</p>
 <p>}</p>
 <p>外连接查询：{</p>
-<p>​    左外连接 select from left join on</p>
-<p>​    右外连接</p>
+<p>​    左外连接 select * from table1 left join on table2 {查询table1的所有及其交集}</p>
+<p>​    右外连接 select * from table1 right join on table2 {查询table2的所有及其交集}</p>
 <p>}</p>
-<p>子查询：</p>
+<p>子查询： {</p>
+<p>​    子查询结果是单行单列</p>
+<p>​    子查询结果是多行单列</p>
+<p>​    子查询结果是多行多列</p>
+<p>}</p>
 <h6 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h6><p><strong>基本概念</strong></p>
 <p><strong>命令</strong>：</p>
 <p>开启事务：start transaction</p>
@@ -489,26 +451,72 @@
       </tags>
   </entry>
   <entry>
-    <title>祝福</title>
+    <title>经典进程同步问题</title>
     <url>/2021/04/05/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cf28069566f3df120a9e407baea6029d6bda028e179259635663447d6a36d2b2">91a3f98ed694b0f3ce330b314503f44343c7689568d8c817b41aee8231c1b8ac2c45eee1ff1957654ce39fa614aa72d62edddab2026368902dbe118138dbcebcff0e82ae177ee640a70739f9e2e38d5eabb0f899fab79883e0d15f04d7f696d66365aa378616d4471ab6b706ebbb2eff</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您需要一扇门的钥匙。。。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <content><![CDATA[<hr>
+<h5 id="一、生产者-消费者问题"><a href="#一、生产者-消费者问题" class="headerlink" title="一、生产者-消费者问题"></a>一、生产者-消费者问题</h5><h6 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h6><p>生产者生产产品到仓库（缓冲区），消费者从缓冲区获取产品，由于进程的异步性，对共享资源（缓冲区）访问是不可控的，因此我们把缓冲区作为临界资源，所以生产者、消费者和临界资源三者是一种互斥的制约关系。同时，消费者也需要等到生产者生产产品才能获取，因此这也是一个同步问题。</p>
+<span id="more"></span>
+
+<h6 id="1、使用记录型信号量解决"><a href="#1、使用记录型信号量解决" class="headerlink" title="1、使用记录型信号量解决"></a>1、使用记录型信号量解决</h6><p>记录性信号量主要是在整型信号量的基础上增加了用于记录等待进程的链表。由问题描述知我们需要解决同步和互斥两个问题。因此设置n为临界资源数量，构建数组存储资源，只有n&gt;0才能存入生产的产品，消费者也才能获取产品。使用mutex作为互斥信号量。</p>
+<p>代码描述如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int in &#x3D; 0, out &#x3D; 0;</span><br><span class="line">item[n] buffer;</span><br><span class="line">semaphore mutex &#x3D; 1, empty &#x3D; n, full &#x3D; 0;</span><br><span class="line">void producer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        producer anitem nextp;</span><br><span class="line">        ...</span><br><span class="line">        wait(empty);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        buffer[in] &#x3D; nextp;</span><br><span class="line">        in :&#x3D; (in+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(full);</span><br><span class="line">    &#125;while(TRUE);</span><br><span class="line">&#125;</span><br><span class="line">void consumer() &#123;</span><br><span class="line">    do &#123;</span><br><span class="line">        wait(full);</span><br><span class="line">        wait(mutex);</span><br><span class="line">        nextc &#x3D; buffer[out];</span><br><span class="line">        out &#x3D; (out+1)%n;</span><br><span class="line">        signal(mutex);</span><br><span class="line">        signal(empty);</span><br><span class="line">    	consumer the item in nextc;</span><br><span class="line">    &#125;Wwhile(TRUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解释：mutex作为互斥信号量，empty作为临界资源数量，full表示可用产品数量。producer函数中使用signal(full)表示对消费者可用数量的增加，以便消费者的wait(full)可继续运行，以此保证了同步。</p>
+<p>注意的是：wait和signal是成对出现的，而mutex初始值为1，以保证互斥访问。并且，同步层是在互斥层“外”的，顺序不能变。</p>
+<p><strong>为什么同步层是外层，而互斥层是内层？</strong></p>
+<p>现假设互斥层为外层，同步层为内层。当生产者生产产品进入缓冲区，即调用wait(mutex)，此时锁定了临界资源以实现互斥，继续调用wait(empty)，若<strong>empty=0，</strong>那么将引起阻塞，临界资源将不可更改。此时的状态是：producer等着consumer将产品消费(signal(empty))，而consumer等着producer将占着的临界资源释放(即signal(mutex))，于是开始循环等待，形成了死锁。因此必须<strong>保证同步在外层，互斥在内层。</strong></p>
+<h6 id="2、使用AND信号量解决"><a href="#2、使用AND信号量解决" class="headerlink" title="2、使用AND信号量解决"></a>2、使用AND信号量解决</h6><p>主要使用AND信号量的特性一次性解决生产者-消费者问题的同步性和互斥行。AND信号量特性是一次性把所有临界资源分配给一个进程（要么拥有全部，要么一个也不能拥有）。即为用Swait(empty, mutex)替代wait(empty)和wait(mutex)，用Ssignal(mutex, full)替代signal(mutex)和signal(full)。consumer中也是如此。</p>
+]]></content>
       <categories>
-        <category>随笔</category>
+        <category>操作系统</category>
       </categories>
       <tags>
-        <tag>生活</tag>
-        <tag>感想</tag>
+        <tag>进程同步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一起看看Java异常</title>
+    <url>/2021/06/04/</url>
+    <content><![CDATA[<hr>
+<blockquote>
+<p>山穷水复疑无路，柳暗花明又一村。——《游山西村》 — 宋<code>·</code>陆游</p>
+</blockquote>
+<h5 id="异常总述"><a href="#异常总述" class="headerlink" title="异常总述"></a>异常总述</h5><h6 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h6><p>异常是指程序在执行期间发生了意外。常说代码不可能永无bug（bushi），异常就发生在代码的编写和执行上。Java提供了大量的内置异常类，我们可以将之归结为语法错误、运行时错误和逻辑错误。语法错误在常用的编辑器中就能发现，通常会以红线标识，运行时错误发生时会抛出异常信息到控制台，而逻辑错误是最难纠正的，需要对代码的逻辑进行重新梳理。</p>
+<span id="more"></span>
+
+<h6 id="异常和错误的区别"><a href="#异常和错误的区别" class="headerlink" title="异常和错误的区别"></a>异常和错误的区别</h6><p>错误是程序运行时遇到硬件或操作系统不能完成相应指令的错误。而异常是运行环境正常情况下遇到的运行时异常情况。</p>
+<h5 id="异常总览"><a href="#异常总览" class="headerlink" title="异常总览"></a>异常总览</h5><p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/throwable.png"></p>
+<p>总的来说，Java异常分为检查异常和非检查异常，即分为编译时检查异常和运行时异常。所有异常类都是包含在java.lang包下，顶级父类是Throwable，下有error和Exception两大分支。见图如下</p>
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/exception.png" style="zoom: 67%;" />
+
+<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/error.png" style="zoom:67%;" />
+
+<p>我们通常所说异常是Exception下的异常类，当发生异常时，最常用的方法是toString()方法和printStackTrace()，前者打印描述当前异常信息到控制台，后者打印当前异常对象的堆栈使用轨迹。</p>
+<h6 id="抛出和捕获异常"><a href="#抛出和捕获异常" class="headerlink" title="抛出和捕获异常"></a>抛出和捕获异常</h6><p>当程序运行时发生了异常，会被监听器监听到，于是形成了一个异常事件，异常事件会生成异常对象，将异常对象提交给JVM，它会找到相应的异常处理方法处理该异常对象，这个过程称为抛出异常。</p>
+<p>当异常抛出后，虚拟机根据方法的调用链查找到异常处理的方法，同时把异常对象也给该方法，这个过程称为捕获异常。</p>
+<h5 id="常见异常"><a href="#常见异常" class="headerlink" title="常见异常"></a>常见异常</h5><p>我们在平时编码过程中可能会常常遇见ClassNotFundException、IOException（受检查异常）和RuntimeException（非检查异常），RuntimeException下的子类我们可能会常遇到的有NullPointException，IndexOutOfBoundsException等，受检查异常和非检查异常都是继承自Exception，它们又有很多相应异常的实现。如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/RuntimeException.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/IOException.png"></p>
+<h5 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h5><h6 id="异常处理过程"><a href="#异常处理过程" class="headerlink" title="异常处理过程"></a>异常处理过程</h6><p>JVM跟踪异常信息是根据方法调用栈去查找异常的，方法调用栈的各个方法组成了一个方法调用链，如下。<img src="https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/methodUse.png" style="zoom:80%;" /></p>
+<p>从main()方法开始一层一层的调用，JVM根据方法调用栈来跟踪，例如：当methodC方法正常执行完毕后就会将该方法从栈中删除；若是该方法产生了异常，看该方法室是否有try…catch…finally语句块处理该异常，若没有，就得在该方法头部加上thows关键字抛出异常，就将该异常交给上层调用方法，再看该方法能否处理异常，以此类推。若是所有方法都不能处理该异常，那么就会触发JVM调用printStackTrace()方法打印出异常堆栈使用轨迹，并终止程序运行。</p>
+<h6 id="异常处理手段"><a href="#异常处理手段" class="headerlink" title="异常处理手段"></a>异常处理手段</h6><p><strong>try…catch…finally语句块处理</strong></p>
+<p>语法说明：try语句块是处理可能会发生异常的代码，catch语句是捕获异常并对异常进行处理，finally也能被当做catch语句块处理，通常是用作“收尾工作”。此外要注意的是try必须与catch或finally之一或全部搭配使用，否则将会报错。当然，catch语句块可以是一个或多个，当catch语句块是零个时，必须有finally。</p>
+<p><font color = "red">注意</font>：当catch语句中有break，continue，return语句时，当执行完这些语句后，若有finally语句，程序仍会执行完finally语句，然后才退出循环、继续循环和方法返回的操作。若是在catch中执行<font color = "red">System.exit(0)</font>后，此时不会执行finally语句（若有）。</p>
+<p><strong>thows和thow处理</strong></p>
+<p>1 thow通常在方法中，通过判断自己不能或不便处理异常时会通过thow抛出<strong>异常对象</strong>。抛给上层调用该方法的方法。</p>
+<p>2 thows通常可以在后面跟多个异常类，在方法的头部，一旦发生异常抛给上层调用。</p>
+<h5 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h5><p>Java确实已经提供了大量的内置异常，但仍有一些特殊情况我们需要自定义异常，例如学生成绩大于100或年靓大于100等等。</p>
+<p>自定义异常都需要继承Exception或其子类，当自定义的异常也可继承于自己定义的其他异常。同时，我们需要定义自定义异常类的数据成员和重写相应的方法。<font color = "red">需要注意的是</font>，自定义异常只能有thow抛出异常对象给上层调用处理，因此在编码时需要处理好对应的异常情况。</p>
+<p>作者言：有遗漏或错误的地方，还请朋友们多多指正，感激不尽！</p>
+<h5 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h5><p>[1] 崔淼、赵晓华  Java程序设计教程 [M] 北京：机械工业出版社 2019.5 ISBN 978-7-111-62467-7</p>
+]]></content>
+      <categories>
+        <category>Java基础</category>
+        <category>Java异常</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Exception</tag>
       </tags>
   </entry>
   <entry>
@@ -562,6 +570,37 @@
       </tags>
   </entry>
   <entry>
+    <title>有意思的小记</title>
+    <url>/2021/11/17/</url>
+    <content><![CDATA[<hr>
+<h4 id="关于char数组的初始化"><a href="#关于char数组的初始化" class="headerlink" title="关于char数组的初始化"></a>关于char数组的初始化</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>该种初始化是得到每个元素的<font color = 'red'>值</font>初始化为<font color = 'orange'>0</font>，字符：’\u0000’ 0</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>该种初始化则是得到每个元素是 空格，<font color='red'>值</font>是<font color='orange'>32</font>。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>小记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络之网络层</title>
+    <url>/2021/09/12/</url>
+    <content><![CDATA[<hr>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+        <tag>IP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑指offer学习笔记</title>
     <url>/2021/09/21/</url>
     <content><![CDATA[<hr>
@@ -581,16 +620,35 @@
       </tags>
   </entry>
   <entry>
-    <title>计算机网络之网络层</title>
-    <url>/2021/09/12/</url>
+    <title>从常用的Arrays.sort()源码学习快排和归并排序</title>
+    <url>/2021/11/23/</url>
     <content><![CDATA[<hr>
+<blockquote>
+<p>两岸猿声啼不住，轻舟已过万重山。——《早发白帝城》<strong>·</strong>李白</p>
+</blockquote>
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>在做Java的某些数组排序问题时，我们常常用到sort方法，那么现在就来具体看看sort里面藏了什么乾坤，它到底是如何运行的。</p>
+<span id="more"></span>
+
+<h5 id="从Arrays-sort-int-a-进入"><a href="#从Arrays-sort-int-a-进入" class="headerlink" title="从Arrays.sort(int[] a)进入"></a>从Arrays.sort(int[] a)进入</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</span><br><span class="line">    DualPivotQuicksort.sort(a, <span class="number">0</span>, a.length - <span class="number">1</span>, <span class="keyword">null</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">/*各参数</span></span><br><span class="line"><span class="comment">    0				——&gt;left,左下标</span></span><br><span class="line"><span class="comment">    a.length - 1	——&gt;right，右下标</span></span><br><span class="line"><span class="comment">    null			——&gt;work[],</span></span><br><span class="line"><span class="comment">    0				——&gt;workBase</span></span><br><span class="line"><span class="comment">    0				——&gt;workLen</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * If the length of an array to be sorted is less than this</span></span><br><span class="line"><span class="comment"> * constant, Quicksort is used in preference to merge sort.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">	小于286时快排更加优先于归并排序</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> QUICKSORT_THRESHOLD = <span class="number">286</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right,</span></span></span><br><span class="line"><span class="function"><span class="params">                 <span class="keyword">int</span>[] work, <span class="keyword">int</span> workBase, <span class="keyword">int</span> workLen)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Use Quicksort on small arrays	</span></span><br><span class="line">    <span class="comment">// 顾名思义，数组大小比较小的时候采用快排，那到底是多小算小呢？</span></span><br><span class="line">    <span class="keyword">if</span> (right - left &lt; QUICKSORT_THRESHOLD) &#123;<span class="comment">// 小于快排边界的时候算小，往上看，边界=286</span></span><br><span class="line">        sort(a, left, right, <span class="keyword">true</span>);<span class="comment">// 此时采用快排&lt;——&gt;快排在下一节</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Index run[i] is the start of i-th run 	索引run[i]是第i次运行的开始</span></span><br><span class="line"><span class="comment">     * (ascending or descending sequence).	升序或降序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span>[] run = <span class="keyword">new</span> <span class="keyword">int</span>[MAX_RUN_COUNT + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>; run[<span class="number">0</span>] = left;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if the array is nearly sorted</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = left; k &lt; right; run[count] = k) &#123;</span><br><span class="line">        <span class="comment">// Equal items in the beginning of the sequence</span></span><br><span class="line">        <span class="keyword">while</span> (k &lt; right &amp;&amp; a[k] == a[k + <span class="number">1</span>])</span><br><span class="line">            k++;</span><br><span class="line">        <span class="keyword">if</span> (k == right) <span class="keyword">break</span>;  <span class="comment">// Sequence finishes with equal items</span></span><br><span class="line">        <span class="keyword">if</span> (a[k] &lt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// ascending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &lt;= a[k]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[k] &gt; a[k + <span class="number">1</span>]) &#123; <span class="comment">// descending</span></span><br><span class="line">            <span class="keyword">while</span> (++k &lt;= right &amp;&amp; a[k - <span class="number">1</span>] &gt;= a[k]);</span><br><span class="line">            <span class="comment">// Transform into an ascending sequence</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> lo = run[count] - <span class="number">1</span>, hi = k; ++lo &lt; --hi; ) &#123;</span><br><span class="line">                <span class="keyword">int</span> t = a[lo]; a[lo] = a[hi]; a[hi] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Merge a transformed descending sequence followed by an</span></span><br><span class="line">        <span class="comment">// ascending sequence</span></span><br><span class="line">        <span class="keyword">if</span> (run[count] &gt; left &amp;&amp; a[run[count]] &gt;= a[run[count] - <span class="number">1</span>]) &#123;</span><br><span class="line">            count--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The array is not highly structured,</span></span><br><span class="line"><span class="comment">         * use Quicksort instead of merge sort.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (++count == MAX_RUN_COUNT) &#123;</span><br><span class="line">            sort(a, left, right, <span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// These invariants should hold true:</span></span><br><span class="line">    <span class="comment">//    run[0] = 0</span></span><br><span class="line">    <span class="comment">//    run[&lt;last&gt;] = right + 1; (terminator)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// A single equal run</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count == <span class="number">1</span> &amp;&amp; run[count] &gt; right) &#123;</span><br><span class="line">        <span class="comment">// Either a single ascending or a transformed descending run.</span></span><br><span class="line">        <span class="comment">// Always check that a final run is a proper terminator, otherwise</span></span><br><span class="line">        <span class="comment">// we have an unterminated trailing run, to handle downstream.</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    right++;</span><br><span class="line">    <span class="keyword">if</span> (run[count] &lt; right) &#123;</span><br><span class="line">        <span class="comment">// Corner case: the final run is not a terminator. This may happen</span></span><br><span class="line">        <span class="comment">// if a final run is an equals run, or there is a single-element run</span></span><br><span class="line">        <span class="comment">// at the end. Fix up by adding a proper terminator at the end.</span></span><br><span class="line">        <span class="comment">// Note that we terminate with (right + 1), incremented earlier.</span></span><br><span class="line">        run[++count] = right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Determine alternation base for merge</span></span><br><span class="line">    <span class="keyword">byte</span> odd = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">1</span>; (n &lt;&lt;= <span class="number">1</span>) &lt; count; odd ^= <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use or create temporary array b for merging</span></span><br><span class="line">    <span class="keyword">int</span>[] b;                 <span class="comment">// temp array; alternates with a</span></span><br><span class="line">    <span class="keyword">int</span> ao, bo;              <span class="comment">// array offsets from &#x27;left&#x27;</span></span><br><span class="line">    <span class="keyword">int</span> blen = right - left; <span class="comment">// space needed for b</span></span><br><span class="line">    <span class="keyword">if</span> (work == <span class="keyword">null</span> || workLen &lt; blen || workBase + blen &gt; work.length) &#123;</span><br><span class="line">        work = <span class="keyword">new</span> <span class="keyword">int</span>[blen];</span><br><span class="line">        workBase = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (odd == <span class="number">0</span>) &#123;</span><br><span class="line">        System.arraycopy(a, left, work, workBase, blen);</span><br><span class="line">        b = a;</span><br><span class="line">        bo = <span class="number">0</span>;</span><br><span class="line">        a = work;</span><br><span class="line">        ao = workBase - left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        b = work;</span><br><span class="line">        ao = <span class="number">0</span>;</span><br><span class="line">        bo = workBase - left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Merging</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> last; count &gt; <span class="number">1</span>; count = last) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = (last = <span class="number">0</span>) + <span class="number">2</span>; k &lt;= count; k += <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> hi = run[k], mi = run[k - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = run[k - <span class="number">2</span>], p = i, q = mi; i &lt; hi; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (q &gt;= hi || p &lt; mi &amp;&amp; a[p + ao] &lt;= a[q + ao]) &#123;</span><br><span class="line">                    b[i + bo] = a[p++ + ao];</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    b[i + bo] = a[q++ + ao];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            run[++last] = hi;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((count &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = right, lo = run[count - <span class="number">1</span>]; --i &gt;= lo;</span><br><span class="line">                b[i + bo] = a[i + ao]</span><br><span class="line">            );</span><br><span class="line">            run[++last] = right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] t = a; a = b; b = t;</span><br><span class="line">        <span class="keyword">int</span> o = ao; ao = bo; bo = o;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">boolean</span> leftmost)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = right - left + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use insertion sort on tiny arrays</span></span><br><span class="line">    <span class="keyword">if</span> (length &lt; INSERTION_SORT_THRESHOLD) &#123;</span><br><span class="line">        <span class="keyword">if</span> (leftmost) &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Traditional (without sentinel) insertion sort,</span></span><br><span class="line"><span class="comment">             * optimized for server VM, is used in case of</span></span><br><span class="line"><span class="comment">             * the leftmost part.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = left, j = i; i &lt; right; j = ++i) &#123;</span><br><span class="line">                <span class="keyword">int</span> ai = a[i + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">while</span> (ai &lt; a[j]) &#123;</span><br><span class="line">                    a[j + <span class="number">1</span>] = a[j];</span><br><span class="line">                    <span class="keyword">if</span> (j-- == left) &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                a[j + <span class="number">1</span>] = ai;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip the longest ascending sequence.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (left &gt;= right) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">while</span> (a[++left] &gt;= a[left - <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Every element from adjoining part plays the role</span></span><br><span class="line"><span class="comment">             * of sentinel, therefore this allows us to avoid the</span></span><br><span class="line"><span class="comment">             * left range check on each iteration. Moreover, we use</span></span><br><span class="line"><span class="comment">             * the more optimized algorithm, so called pair insertion</span></span><br><span class="line"><span class="comment">             * sort, which is faster (in the context of Quicksort)</span></span><br><span class="line"><span class="comment">             * than traditional implementation of insertion sort.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = left; ++left &lt;= right; k = ++left) &#123;</span><br><span class="line">                <span class="keyword">int</span> a1 = a[k], a2 = a[left];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (a1 &lt; a2) &#123;</span><br><span class="line">                    a2 = a1; a1 = a[left];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">while</span> (a1 &lt; a[--k]) &#123;</span><br><span class="line">                    a[k + <span class="number">2</span>] = a[k];</span><br><span class="line">                &#125;</span><br><span class="line">                a[++k + <span class="number">1</span>] = a1;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (a2 &lt; a[--k]) &#123;</span><br><span class="line">                    a[k + <span class="number">1</span>] = a[k];</span><br><span class="line">                &#125;</span><br><span class="line">                a[k + <span class="number">1</span>] = a2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> last = a[right];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (last &lt; a[--right]) &#123;</span><br><span class="line">                a[right + <span class="number">1</span>] = a[right];</span><br><span class="line">            &#125;</span><br><span class="line">            a[right + <span class="number">1</span>] = last;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Inexpensive approximation of length / 7</span></span><br><span class="line">    <span class="keyword">int</span> seventh = (length &gt;&gt; <span class="number">3</span>) + (length &gt;&gt; <span class="number">6</span>) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Sort five evenly spaced elements around (and including) the</span></span><br><span class="line"><span class="comment">     * center element in the range. These elements will be used for</span></span><br><span class="line"><span class="comment">     * pivot selection as described below. The choice for spacing</span></span><br><span class="line"><span class="comment">     * these elements was empirically determined to work well on</span></span><br><span class="line"><span class="comment">     * a wide variety of inputs.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">int</span> e3 = (left + right) &gt;&gt;&gt; <span class="number">1</span>; <span class="comment">// The midpoint</span></span><br><span class="line">    <span class="keyword">int</span> e2 = e3 - seventh;</span><br><span class="line">    <span class="keyword">int</span> e1 = e2 - seventh;</span><br><span class="line">    <span class="keyword">int</span> e4 = e3 + seventh;</span><br><span class="line">    <span class="keyword">int</span> e5 = e4 + seventh;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sort these elements using insertion sort</span></span><br><span class="line">    <span class="keyword">if</span> (a[e2] &lt; a[e1]) &#123; <span class="keyword">int</span> t = a[e2]; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a[e3] &lt; a[e2]) &#123; <span class="keyword">int</span> t = a[e3]; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a[e4] &lt; a[e3]) &#123; <span class="keyword">int</span> t = a[e4]; a[e4] = a[e3]; a[e3] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e2]) &#123; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">            <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a[e5] &lt; a[e4]) &#123; <span class="keyword">int</span> t = a[e5]; a[e5] = a[e4]; a[e4] = t;</span><br><span class="line">        <span class="keyword">if</span> (t &lt; a[e3]) &#123; a[e4] = a[e3]; a[e3] = t;</span><br><span class="line">            <span class="keyword">if</span> (t &lt; a[e2]) &#123; a[e3] = a[e2]; a[e2] = t;</span><br><span class="line">                <span class="keyword">if</span> (t &lt; a[e1]) &#123; a[e2] = a[e1]; a[e1] = t; &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Pointers</span></span><br><span class="line">    <span class="keyword">int</span> less  = left;  <span class="comment">// The index of the first element of center part</span></span><br><span class="line">    <span class="keyword">int</span> great = right; <span class="comment">// The index before the first element of right part</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a[e1] != a[e2] &amp;&amp; a[e2] != a[e3] &amp;&amp; a[e3] != a[e4] &amp;&amp; a[e4] != a[e5]) &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Use the second and fourth of the five sorted elements as pivots.</span></span><br><span class="line"><span class="comment">         * These values are inexpensive approximations of the first and</span></span><br><span class="line"><span class="comment">         * second terciles of the array. Note that pivot1 &lt;= pivot2.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> pivot1 = a[e2];</span><br><span class="line">        <span class="keyword">int</span> pivot2 = a[e4];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * The first and the last elements to be sorted are moved to the</span></span><br><span class="line"><span class="comment">         * locations formerly occupied by the pivots. When partitioning</span></span><br><span class="line"><span class="comment">         * is complete, the pivots are swapped back into their final</span></span><br><span class="line"><span class="comment">         * positions, and excluded from subsequent sorting.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        a[e2] = a[left];</span><br><span class="line">        a[e4] = a[right];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Skip elements, which are less or greater than pivot values.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">while</span> (a[++less] &lt; pivot1);</span><br><span class="line">        <span class="keyword">while</span> (a[--great] &gt; pivot2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Partitioning:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   left part           center part                   right part</span></span><br><span class="line"><span class="comment">         * +--------------------------------------------------------------+</span></span><br><span class="line"><span class="comment">         * |  &lt; pivot1  |  pivot1 &lt;= &amp;&amp; &lt;= pivot2  |    ?    |  &gt; pivot2  |</span></span><br><span class="line"><span class="comment">         * +--------------------------------------------------------------+</span></span><br><span class="line"><span class="comment">         *               ^                          ^       ^</span></span><br><span class="line"><span class="comment">         *               |                          |       |</span></span><br><span class="line"><span class="comment">         *              less                        k     great</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Invariants:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *              all in (left, less)   &lt; pivot1</span></span><br><span class="line"><span class="comment">         *    pivot1 &lt;= all in [less, k)     &lt;= pivot2</span></span><br><span class="line"><span class="comment">         *              all in (great, right) &gt; pivot2</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        outer:</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = less - <span class="number">1</span>; ++k &lt;= great; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> ak = a[k];</span><br><span class="line">            <span class="keyword">if</span> (ak &lt; pivot1) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                a[k] = a[less];</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Here and below we use &quot;a[i] = b; i++;&quot; instead</span></span><br><span class="line"><span class="comment">                 * of &quot;a[i++] = b;&quot; due to performance issue.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                a[less] = ak;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ak &gt; pivot2) &#123; <span class="comment">// Move a[k] to right part</span></span><br><span class="line">                <span class="keyword">while</span> (a[great] &gt; pivot2) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (great-- == k) &#123;</span><br><span class="line">                        <span class="keyword">break</span> outer;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (a[great] &lt; pivot1) &#123; <span class="comment">// a[great] &lt;= pivot2</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = a[great];</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">// pivot1 &lt;= a[great] &lt;= pivot2</span></span><br><span class="line">                    a[k] = a[great];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Here and below we use &quot;a[i] = b; i--;&quot; instead</span></span><br><span class="line"><span class="comment">                 * of &quot;a[i--] = b;&quot; due to performance issue.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                a[great] = ak;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Swap pivots into their final positions</span></span><br><span class="line">        a[left]  = a[less  - <span class="number">1</span>]; a[less  - <span class="number">1</span>] = pivot1;</span><br><span class="line">        a[right] = a[great + <span class="number">1</span>]; a[great + <span class="number">1</span>] = pivot2;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort left and right parts recursively, excluding known pivots</span></span><br><span class="line">        sort(a, left, less - <span class="number">2</span>, leftmost);</span><br><span class="line">        sort(a, great + <span class="number">2</span>, right, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * If center part is too large (comprises &gt; 4/7 of the array),</span></span><br><span class="line"><span class="comment">         * swap internal pivot values to ends.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (less &lt; e1 &amp;&amp; e5 &lt; great) &#123;</span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Skip elements, which are equal to pivot values.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="keyword">while</span> (a[less] == pivot1) &#123;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (a[great] == pivot2) &#123;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * Partitioning:</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             *   left part         center part                  right part</span></span><br><span class="line"><span class="comment">             * +----------------------------------------------------------+</span></span><br><span class="line"><span class="comment">             * | == pivot1 |  pivot1 &lt; &amp;&amp; &lt; pivot2  |    ?    | == pivot2 |</span></span><br><span class="line"><span class="comment">             * +----------------------------------------------------------+</span></span><br><span class="line"><span class="comment">             *              ^                        ^       ^</span></span><br><span class="line"><span class="comment">             *              |                        |       |</span></span><br><span class="line"><span class="comment">             *             less                      k     great</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Invariants:</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             *              all in (*,  less) == pivot1</span></span><br><span class="line"><span class="comment">             *     pivot1 &lt; all in [less,  k)  &lt; pivot2</span></span><br><span class="line"><span class="comment">             *              all in (great, *) == pivot2</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            outer:</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = less - <span class="number">1</span>; ++k &lt;= great; ) &#123;</span><br><span class="line">                <span class="keyword">int</span> ak = a[k];</span><br><span class="line">                <span class="keyword">if</span> (ak == pivot1) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = ak;</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ak == pivot2) &#123; <span class="comment">// Move a[k] to right part</span></span><br><span class="line">                    <span class="keyword">while</span> (a[great] == pivot2) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (great-- == k) &#123;</span><br><span class="line">                            <span class="keyword">break</span> outer;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (a[great] == pivot1) &#123; <span class="comment">// a[great] &lt; pivot2</span></span><br><span class="line">                        a[k] = a[less];</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                         * Even though a[great] equals to pivot1, the</span></span><br><span class="line"><span class="comment">                         * assignment a[less] = pivot1 may be incorrect,</span></span><br><span class="line"><span class="comment">                         * if a[great] and pivot1 are floating-point zeros</span></span><br><span class="line"><span class="comment">                         * of different signs. Therefore in float and</span></span><br><span class="line"><span class="comment">                         * double sorting methods we have to use more</span></span><br><span class="line"><span class="comment">                         * accurate assignment a[less] = a[great].</span></span><br><span class="line"><span class="comment">                         */</span></span><br><span class="line">                        a[less] = pivot1;</span><br><span class="line">                        ++less;</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123; <span class="comment">// pivot1 &lt; a[great] &lt; pivot2</span></span><br><span class="line">                        a[k] = a[great];</span><br><span class="line">                    &#125;</span><br><span class="line">                    a[great] = ak;</span><br><span class="line">                    --great;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Sort center part recursively</span></span><br><span class="line">        sort(a, less, great, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// Partitioning with one pivot</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Use the third of the five sorted elements as pivot.</span></span><br><span class="line"><span class="comment">         * This value is inexpensive approximation of the median.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">int</span> pivot = a[e3];</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Partitioning degenerates to the traditional 3-way</span></span><br><span class="line"><span class="comment">         * (or &quot;Dutch National Flag&quot;) schema:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   left part    center part              right part</span></span><br><span class="line"><span class="comment">         * +-------------------------------------------------+</span></span><br><span class="line"><span class="comment">         * |  &lt; pivot  |   == pivot   |     ?    |  &gt; pivot  |</span></span><br><span class="line"><span class="comment">         * +-------------------------------------------------+</span></span><br><span class="line"><span class="comment">         *              ^              ^        ^</span></span><br><span class="line"><span class="comment">         *              |              |        |</span></span><br><span class="line"><span class="comment">         *             less            k      great</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Invariants:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         *   all in (left, less)   &lt; pivot</span></span><br><span class="line"><span class="comment">         *   all in [less, k)     == pivot</span></span><br><span class="line"><span class="comment">         *   all in (great, right) &gt; pivot</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * Pointer k is the first index of ?-part.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = less; k &lt;= great; ++k) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[k] == pivot) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> ak = a[k];</span><br><span class="line">            <span class="keyword">if</span> (ak &lt; pivot) &#123; <span class="comment">// Move a[k] to left part</span></span><br><span class="line">                a[k] = a[less];</span><br><span class="line">                a[less] = ak;</span><br><span class="line">                ++less;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// a[k] &gt; pivot - Move a[k] to right part</span></span><br><span class="line">                <span class="keyword">while</span> (a[great] &gt; pivot) &#123;</span><br><span class="line">                    --great;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (a[great] &lt; pivot) &#123; <span class="comment">// a[great] &lt;= pivot</span></span><br><span class="line">                    a[k] = a[less];</span><br><span class="line">                    a[less] = a[great];</span><br><span class="line">                    ++less;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">// a[great] == pivot</span></span><br><span class="line">                    <span class="comment">/*</span></span><br><span class="line"><span class="comment">                     * Even though a[great] equals to pivot, the</span></span><br><span class="line"><span class="comment">                     * assignment a[k] = pivot may be incorrect,</span></span><br><span class="line"><span class="comment">                     * if a[great] and pivot are floating-point</span></span><br><span class="line"><span class="comment">                     * zeros of different signs. Therefore in float</span></span><br><span class="line"><span class="comment">                     * and double sorting methods we have to use</span></span><br><span class="line"><span class="comment">                     * more accurate assignment a[k] = a[great].</span></span><br><span class="line"><span class="comment">                     */</span></span><br><span class="line">                    a[k] = pivot;</span><br><span class="line">                &#125;</span><br><span class="line">                a[great] = ak;</span><br><span class="line">                --great;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Sort left and right parts recursively.</span></span><br><span class="line"><span class="comment">         * All elements from center part are equal</span></span><br><span class="line"><span class="comment">         * and, therefore, already sorted.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        sort(a, left, less - <span class="number">1</span>, leftmost);</span><br><span class="line">        sort(a, great + <span class="number">1</span>, right, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>计算机网络</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>计算机网络</tag>
-        <tag>IP</tag>
+        <tag>算法</tag>
+        <tag>快排</tag>
+        <tag>归并排序</tag>
       </tags>
   </entry>
 </search>
