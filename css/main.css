@@ -1899,7 +1899,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0effff;
+  background: #1bab63;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3097,7 +3097,7 @@ pre .javascript .function {
   }
 }
 body {
-  background-image: url("https://cdn.jsdelivr.net/gh/Jinzewang/PictureForBlog/img/background.png");
+  background-image: url("");
   height: 100%;
   width: 100%;
   background-position: 100% 100%;

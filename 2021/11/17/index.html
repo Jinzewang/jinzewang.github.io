@@ -127,15 +127,15 @@
 
 
 
-<meta name="description" content="关于char数组的初始化1char[] ch &#x3D; new char[3];  该种初始化是得到每个元素的值初始化为0，字符：’\u0000’ 0 1char[] ch &#x3D; &amp;#123;&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;&amp;#125;;  该种初始化则是得到每个元素是 空格，值是32。">
+<meta name="description" content="关于char数组的初始化1char[] ch &#x3D; new char[3];  该种初始化是得到每个元素的值初始化为0，字符：’\u0000’ 0 1char[] ch &#x3D; &amp;#123;&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;&amp;#125;;  该种初始化则是得到每个元素是 空格，值是32。 mybatis和mybatis-plus中mapper-locat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有意思的小记">
 <meta property="og:url" content="https://jinzewang.github.io/2021/11/17/index.html">
 <meta property="og:site_name" content="King&#39;s Blog">
-<meta property="og:description" content="关于char数组的初始化1char[] ch &#x3D; new char[3];  该种初始化是得到每个元素的值初始化为0，字符：’\u0000’ 0 1char[] ch &#x3D; &amp;#123;&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;&amp;#125;;  该种初始化则是得到每个元素是 空格，值是32。">
+<meta property="og:description" content="关于char数组的初始化1char[] ch &#x3D; new char[3];  该种初始化是得到每个元素的值初始化为0，字符：’\u0000’ 0 1char[] ch &#x3D; &amp;#123;&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;,&amp;#x27; &amp;#x27;&amp;#125;;  该种初始化则是得到每个元素是 空格，值是32。 mybatis和mybatis-plus中mapper-locat">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-17T06:06:30.513Z">
-<meta property="article:modified_time" content="2021-12-19T07:00:45.510Z">
+<meta property="article:modified_time" content="2022-04-27T03:47:29.162Z">
 <meta property="article:author" content="King">
 <meta property="article:tag" content="小记">
 <meta name="twitter:card" content="summary">
@@ -471,6 +471,16 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>[] ch = &#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27; &#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>该种初始化则是得到每个元素是 空格，<font color='red'>值</font>是<font color='orange'>32</font>。</p>
+<h4 id="mybatis和mybatis-plus中mapper-locations的区别"><a href="#mybatis和mybatis-plus中mapper-locations的区别" class="headerlink" title="mybatis和mybatis-plus中mapper-locations的区别"></a>mybatis和mybatis-plus中mapper-locations的区别</h4><p>在mybatis中是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.mapper-locations=classpath:mapper<span class="comment">/*Mapper.xml</span></span><br></pre></td></tr></table></figure>
+
+<p>而在mybatis-plus中是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis-plus.mapper-locations&#x3D;classpath*:&#x2F;*&#x2F;mapper&#x2F;*Mapper.xml</span><br></pre></td></tr></table></figure>
+
+<p>如果配置错误，会出现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Property &#39;mapperLocations&#39; was not specified or no matching resources found		</span><br></pre></td></tr></table></figure>
+
+<p>错误。表示mapperLocations未定义或未找到。即找不到自己所配置的xml文件位置。</p>
 
       
     </div>
@@ -617,7 +627,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -639,7 +649,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -673,6 +683,12 @@
                 
                   <span class="links-of-author-item">
                     <a href="https://juejin.cn/user/2735240661439847" target="_blank" title="juejin">
+                      
+                        <i class="fa fa-fw fa-globe"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://gitee.com/jinzewang2014" target="_blank" title="Gitee">
                       
                         <i class="fa fa-fw fa-globe"></i></a>
                   </span>
@@ -715,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Echar%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">关于char数组的初始化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Echar%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">关于char数组的初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mybatis%E5%92%8Cmybatis-plus%E4%B8%ADmapper-locations%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">mybatis和mybatis-plus中mapper-locations的区别</span></a></li></ol></div>
             
 
           </div>
